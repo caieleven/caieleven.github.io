@@ -113,7 +113,12 @@
 
 <p>此处的  <strong>.</strong>  与Linux下的意义一样，表示当前目录，也就是当前目录下的所有文件</p>
 <p>在后续的提交中，各参数</p>
-<figure class="highlight plaintext"><figcaption><span>add -A ```	提交所有变化</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   ``` git add -u```	提交被修改的和被删除的，不包括新添加的</span><br><span class="line"></span><br><span class="line">   ``` git add . ```	提交新文件和被修改的文件，不包括被删除的</span><br><span class="line"></span><br><span class="line">3. 缓存区到本地仓库</span><br><span class="line"></span><br><span class="line">   ```bash</span><br><span class="line">   git commmit -m &quot;&quot;</span><br></pre></td></tr></table></figure>
+<p><code>git add -A</code>    提交所有变化</p>
+<p><code> git add -u</code>    提交被修改的和被删除的，不包括新添加的</p>
+<p><code>git add .</code>    提交新文件和被修改的文件，不包括被删除的</p>
+</li>
+<li><p>缓存区到本地仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commmit -m <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>“**-m**”一定要加，“”里面为提交的一些信息，注释。</p>
 </li>
