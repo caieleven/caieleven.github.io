@@ -71,6 +71,86 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-blog" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/16/blog/" class="article-date">
+  <time class="dt-published" datetime="2021-07-16T04:21:02.000Z" itemprop="datePublished">2021-07-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/07/16/blog/">blog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-安装node-js和hexo"><a href="#1-安装node-js和hexo" class="headerlink" title="1. 安装node.js和hexo"></a>1. 安装node.js和hexo</h1><h2 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h2><ol>
+<li><p>下载 安装</p>
+</li>
+<li><p>设置npm在安装全局模块时的路径和环境变量</p>
+<ol>
+<li><p>在安装目录下新建两个文件夹node_cache &amp; node_global</p>
+</li>
+<li><p>打开cmd, 执行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> prefix <span class="string">&quot;xxxx\node_global&quot;</span></span><br><span class="line">npm config <span class="built_in">set</span> cache <span class="string">&quot;xxxx\node_cache&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>为系统环境变量新建一个变量</p>
+<p>变量名: NODE_PATH</p>
+<p>值: xxxx\node_global\node_modules</p>
+</li>
+<li><p>编辑用户变量的path</p>
+<p>将相应的npm路劲该为:  xxxx\node_global</p>
+</li>
+</ol>
+</li>
+<li><p>在cmd窗口执行下面命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install webpack -g</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><ol>
+<li><p>先在github建立一个仓库:username.github.io</p>
+</li>
+<li><p>建立一个新文件夹, 执行命令, 下载安装hexo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
+<li><p>安装成功后, 在该文件下, 执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure></li>
+<li><p>然后, 依次执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g    <span class="comment">#hexo generate</span></span><br><span class="line">hexo s    <span class="comment">#hexo server</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="将hexo部署到GitHub"><a href="#将hexo部署到GitHub" class="headerlink" title="将hexo部署到GitHub"></a>将hexo部署到GitHub</h2><ol>
+<li><p>打开上一步新建文件夹下的  _config.yml 文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">	<span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">	<span class="attr">repository:</span> <span class="string">https://github.com/username/username.github.io</span></span><br><span class="line">	<span class="attr">branch:</span> <span class="string">master</span>  <span class="comment">#or main</span></span><br></pre></td></tr></table></figure>
+
+<p>注意, 每个 “:”后都有空格</p>
+</li>
+<li><p>安装git部署插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li>
+<li><p>然后依次执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean	<span class="comment">#清楚缓存文件和已经生成的静态文件</span></span><br><span class="line">hexo g		<span class="comment">#生成网站静态文件(hexo generate)</span></span><br><span class="line">hexo d		<span class="comment">#将网站静态文件部署到设定仓库(hexo deploy)</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/16/blog/" data-id="ckr5w0qmu00009wtfa41mf6wt" data-title="blog" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/14/git/" class="article-date">
@@ -160,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/14/git/" data-id="ckr3kdxo80000ectfg1tkhebj" data-title="git" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/14/git/" data-id="ckr5w0qmy00019wtf9zmp42k9" data-title="git" class="article-share-link">Share</a>
       
       
       
@@ -211,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/14/hello-world/" data-id="ckr3kdxoi0001ectf67hc3f1k" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/07/14/hello-world/" data-id="ckr5w0qn400029wtf41qag7kx" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -252,6 +332,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/07/16/blog/">blog</a>
+          </li>
         
           <li>
             <a href="/2021/07/14/git/">git</a>
