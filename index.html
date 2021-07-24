@@ -186,7 +186,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-24 21:48:00" itemprop="dateModified" datetime="2021-07-24T21:48:00+08:00">2021-07-24</time>
+                <time title="Modified: 2021-07-24 22:10:56" itemprop="dateModified" datetime="2021-07-24T22:10:56+08:00">2021-07-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,6 +251,32 @@
 <li><p>然后依次执行命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean	<span class="comment">#清楚缓存文件和已经生成的静态文件</span></span><br><span class="line">hexo g		<span class="comment">#生成网站静态文件(hexo generate)</span></span><br><span class="line">hexo d		<span class="comment">#将网站静态文件部署到设定仓库(hexo deploy)</span></span><br></pre></td></tr></table></figure></li>
 </ol>
+<h1 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h1><ol>
+<li><p>下载next</p>
+<p>执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></li>
+<li><p>开始配置</p>
+<p>修改根目录下的_config.yml文件(站点配置文件)</p>
+<p>修改theme值位next</p>
+</li>
+<li><p>回到git bush中，执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="优化主题"><a href="#优化主题" class="headerlink" title="优化主题"></a>优化主题</h1><ol>
+<li><p>添加分类与标签</p>
+<ol>
+<li><p>执行命令<code>hexo new page categories</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure></li>
+<li><p>然后在source文件夹下多出一个categories（tags）文件夹，打开里面的index.md，添加一行内容</p>
+</li>
+</ol>
+<p><code>type: &quot;categories&quot;</code>（<code>type: &quot;tags&quot;</code>)后保存</p>
+<ol start="3">
+<li><p>在博客中，为文章添加属性</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">categories: 技术</span><br><span class="line">tags:</span><br><span class="line"><span class="code">	-hexo</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
 
       
     </div>
@@ -301,8 +327,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-15 19:56:13" itemprop="dateModified" datetime="2021-07-15T19:56:13+08:00">2021-07-15</time>
+                <time title="Modified: 2021-07-24 21:56:51" itemprop="dateModified" datetime="2021-07-24T21:56:51+08:00">2021-07-24</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
 
           
 
