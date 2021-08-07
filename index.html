@@ -155,6 +155,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/02/c-cin%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/02/c-cin%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">c++ cin详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-02 17:07:36 / Modified: 17:55:42" itemprop="dateCreated datePublished" datetime="2021-08-02T17:07:36+08:00">2021-08-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="cin简介"><a href="#cin简介" class="headerlink" title="cin简介"></a>cin简介</h1><p>​    cin是c++标准输入流对象，即istream类的对象。同理，cout是ostream类的对象。</p>
+<p>​    当我们从键盘中输入字符串的时候，需要敲回车键才能将这个字符串输送到缓冲区中，然后敲入的这个回车键(\r)会被转换为一个换行符(\n)。</p>
+<p>​    cin读取数据时，也是从缓冲区中获取数据，缓冲区为空时，cin的成员函数阻塞，等待数据的到来，一旦缓冲区中有数据，就触发cin的成员函数去读取数据。</p>
+<h1 id="cin常用输入方法"><a href="#cin常用输入方法" class="headerlink" title="cin常用输入方法"></a>cin常用输入方法</h1><h2 id="cin-gt-gt"><a href="#cin-gt-gt" class="headerlink" title="cin &gt;&gt;"></a>cin &gt;&gt;</h2><p>​    cin可以连续从键盘读取想要的数据，以空白字符作为i分隔符。</p>
+<p>​    当cin&gt;&gt;从缓冲区读取数据时，若缓冲区第一个字符是空白字符（比如空格、tab、换行等），cin会将其忽略并清楚，读取下一个字符，若缓冲区为空，则继续等待。</p>
+<p>​    若略过空白字符，也有方法，此处不展开。</p>
+<h2 id="cin-get"><a href="#cin-get" class="headerlink" title="cin.get()"></a>cin.get()</h2><ol>
+<li><p>读取一个字符</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char_a = cin.<span class="built_in">get</span>();</span><br><span class="line">cin.<span class="built_in">get</span>(char_b);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>第一种用法的返回值是一个int值，成功则返回读取字符的ASCII码值</li>
+<li>第二个的返回值为一个cin对象，因此支持链式操作，比如：<code> cin.get(a).get(b)</code></li>
+</ol>
+</li>
+<li><p>读取一行</p>
+</li>
+</ol>
+<h2 id="cin-getline"><a href="#cin-getline" class="headerlink" title="cin.getline()"></a>cin.getline()</h2><p>​    函数原型</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">istream&amp; <span class="title">getline</span><span class="params">(<span class="keyword">char</span>* s, streamsize count)</span></span>; <span class="comment">//默认以换行符结束</span></span><br><span class="line"><span class="function">istream&amp; <span class="title">getline</span><span class="params">(<span class="keyword">char</span>* s, streamsize count, <span class="keyword">char</span> delim)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>​    从函数原型中可知具体用法，因此省略。</p>
+<p>​    * 注：cin.getline()不会将结束符残留在输入缓冲区，而cin.get()会。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/16/blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -564,20 +654,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
