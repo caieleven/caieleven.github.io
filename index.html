@@ -155,6 +155,130 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/07/Ubuntu%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/07/Ubuntu%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="post-title-link" itemprop="url">Ubuntu文件权限</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-07 15:43:06 / Modified: 16:48:59" itemprop="dateCreated datePublished" datetime="2021-08-07T15:43:06+08:00">2021-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="查看权限"><a href="#查看权限" class="headerlink" title="查看权限"></a>查看权限</h1><p>使用命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l</span><br></pre></td></tr></table></figure>
+
+<p>可得到如下格式内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drwxrw-rwx 0 root toot 1233 May 1 00:34 temp</span><br></pre></td></tr></table></figure>
+
+<p>内容含义是</p>
+<table>
+<thead>
+<tr>
+<th align="center">权限</th>
+<th align="center">incode</th>
+<th align="center">所属用户</th>
+<th align="center">所属用户组</th>
+<th align="center">文件大小</th>
+<th align="center">修改时间</th>
+<th align="center">文件名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">drwxrw-rwx</td>
+<td align="center">0</td>
+<td align="center">root</td>
+<td align="center">root</td>
+<td align="center">1233</td>
+<td align="center">…</td>
+<td align="center">temp</td>
+</tr>
+</tbody></table>
+<p>其中，各符号含义的具体含义如下：</p>
+<ul>
+<li>d 是否为文件夹</li>
+<li>r 是否有读取权限</li>
+<li>w 是否有写入权限</li>
+<li>x 是否有执行权限</li>
+<li>-表示没有此项权限</li>
+</ul>
+<p>权限具体含义：</p>
+<ul>
+<li>第一位表示是否为文件夹</li>
+<li>2-4位，表示所属用户的三项权限</li>
+<li>5-7位，表示所属用户组的三项权限</li>
+<li>8-10位表示其它用户的三项权限</li>
+</ul>
+<h1 id="更改文件权限"><a href="#更改文件权限" class="headerlink" title="更改文件权限"></a>更改文件权限</h1><p><strong>使用chmod更改权限</strong></p>
+<p>此处记录一种简单的方法：</p>
+<p>Linux系统内部设定：</p>
+<blockquote>
+<p>r = 4    w = 2    x = 1    - = 0</p>
+</blockquote>
+<p>r w x任意一种组合的三个值相加得到的结果都不相同，所以，可以如下例般修改文件权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 temp.cpp</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/02/c-cin%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -654,20 +778,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
