@@ -186,7 +186,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-12 22:59:56" itemprop="dateModified" datetime="2021-08-12T22:59:56+08:00">2021-08-12</time>
+                <time title="Modified: 2021-08-13 00:41:17" itemprop="dateModified" datetime="2021-08-13T00:41:17+08:00">2021-08-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -313,6 +313,11 @@
 <h1 id="Make-file目标文件搜索"><a href="#Make-file目标文件搜索" class="headerlink" title="Make file目标文件搜索"></a>Make file目标文件搜索</h1><p>需要的文件存于不同的路径下，就需要使用Makefile的目录搜索文件功能。</p>
 <p>常见的搜索的方法的主要有两种：一般搜索<code>VPATH</code>和选择搜索<code>vpath</code>。乍一看只是大小写的区别，其实两者在本质上也是不同的。</p>
 <p>VPATH 和 vpath 的区别：VPATH 是变量，更具体的说是环境变量，Makefile 中的一种特殊变量，使用时需要指定文件的路径；vpath 是关键字，按照模式搜索，也可以说成是选择搜索。搜索的时候不仅需要加上文件的路径，还需要加上相应限制的条件。</p>
+<h1 id="Makefile文件包含"><a href="#Makefile文件包含" class="headerlink" title="Makefile文件包含"></a>Makefile文件包含</h1><p>当make读取到<strong>include</strong>关键字的之后，会暂停读取当前文件，转去读取include包含的文件，读取结束后返回。</p>
+<blockquote>
+<p>注：<strong>include</strong>包含多个文件时，用空格隔开</p>
+</blockquote>
+<p>还有一个命令**-include**待补充。</p>
 
       
     </div>
