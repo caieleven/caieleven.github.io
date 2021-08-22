@@ -20,15 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="雪堂">
-<meta property="og:url" content="http://example.com/categories/c-c/index.html">
+  <meta name="description" content="1. 什么是左值右值在c++中，左值与右值定义较c而言，不同。 根据《c++ Primer》中的说法：  一个表达式是左值还是右值，取决于我们使用的是它的值还是它在内存中的位置。  在c++中，左右值有个重要特点：   左值存放在对象中，有持久的状态。 右值要么是字面常量，要么是在表达式求值过程中创建的临时对象，没有持久的状态。   2. 左值引用与右值引用左值引用时常见的引用，我们一般所说的引用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++左右值">
+<meta property="og:url" content="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/index.html">
 <meta property="og:site_name" content="雪堂">
+<meta property="og:description" content="1. 什么是左值右值在c++中，左值与右值定义较c而言，不同。 根据《c++ Primer》中的说法：  一个表达式是左值还是右值，取决于我们使用的是它的值还是它在内存中的位置。  在c++中，左右值有个重要特点：   左值存放在对象中，有持久的状态。 右值要么是字面常量，要么是在表达式求值过程中创建的临时对象，没有持久的状态。   2. 左值引用与右值引用左值引用时常见的引用，我们一般所说的引用">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-22T07:22:03.000Z">
+<meta property="article:modified_time" content="2021-08-22T07:39:32.023Z">
 <meta property="article:author" content="Caieleven">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/categories/c-c/">
+<link rel="canonical" href="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/">
 
 
 <script id="page-configurations">
@@ -36,12 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Category: c/c++ | 雪堂</title>
+  <title>c++左右值 | 雪堂</title>
   
 
 
@@ -149,51 +153,112 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">c/c++
-          <small>Category</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          c++左右值
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-22 15:22:03 / Modified: 15:39:32" itemprop="dateCreated datePublished" datetime="2021-08-22T15:22:03+08:00">2021-08-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <h1 id="1-什么是左值右值"><a href="#1-什么是左值右值" class="headerlink" title="1. 什么是左值右值"></a>1. 什么是左值右值</h1><p>在c++中，左值与右值定义较c而言，不同。</p>
+<p>根据《c++ Primer》中的说法：</p>
+<blockquote>
+<p>一个表达式是左值还是右值，取决于我们使用的是它的值还是它在内存中的位置。</p>
+</blockquote>
+<p>在c++中，左右值有个重要特点：</p>
+<blockquote>
+<ul>
+<li>左值存放在对象中，有持久的状态。</li>
+<li>右值要么是字面常量，要么是在表达式求值过程中创建的临时对象，没有持久的状态。</li>
+</ul>
+</blockquote>
+<h1 id="2-左值引用与右值引用"><a href="#2-左值引用与右值引用" class="headerlink" title="2. 左值引用与右值引用"></a>2. 左值引用与右值引用</h1><p>左值引用时常见的引用，我们一般所说的引用就是左值引用，左值引用就是将一个对象的内存空间绑定到另一个变量上。根据定义，可以看到，我们在创建引用时，使用的是一个对象在内存中的位置，这个对象就是左值，因此，我们不能将一个右值绑定到左值引用上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> temp = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;atemp = temp;		<span class="comment">//正确</span></span><br><span class="line"><span class="keyword">int</span> &amp;btemp = <span class="number">1</span>;			<span class="comment">//错误</span></span><br></pre></td></tr></table></figure>
+
+<p>另外，由于常量左值引用保证我们不可以通过引用改变内存空c间的值，所以，我们可以将右值绑定到常量引用上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; ctemp = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>右值引用的声明方法与左值不同，它只能绑定到右值上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; atemp = a;		<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">int</span> &amp;&amp; btemp = <span class="number">1</span>;		<span class="comment">//正确</span></span><br></pre></td></tr></table></figure>
+
+<p>由于右值引用只能绑定到右值上，根据前面所介绍的右值特性：</p>
+<blockquote>
+<p>右值引用的对象，是临时的，即将被销毁，并且，右值引用的对象，不会在其它地方使用。</p>
+</blockquote>
+<p>所以：</p>
+<p><strong>接收和使用右值引用的代码，可以自由接管所引用的对象的资源，而无需担心对其他代码逻辑造成数据破坏</strong></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-08-02T17:07:36+08:00"
-              content="2021-08-02">
-          08-02
-        </time>
-      </div>
+      <footer class="post-footer">
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/08/02/c-cin%E8%AF%A6%E8%A7%A3/" itemprop="url">
-            <span itemprop="name">c++ cin详解</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/19/c++%E6%B3%A8%E9%87%8A/" rel="prev" title="c++注释">
+      <i class="fa fa-chevron-left"></i> c++注释
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -246,6 +311,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是左值右值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E4%B8%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">2. 左值引用与右值引用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
