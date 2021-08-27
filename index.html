@@ -155,6 +155,158 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/27/Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/27/Linux/" class="post-title-link" itemprop="url">Linux.md</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-27 23:29:19" itemprop="dateCreated datePublished" datetime="2021-08-27T23:29:19+08:00">2021-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-08-28 00:31:54" itemprop="dateModified" datetime="2021-08-28T00:31:54+08:00">2021-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-文件和目录管理"><a href="#1-文件和目录管理" class="headerlink" title="1. 文件和目录管理"></a>1. 文件和目录管理</h1><h2 id="1-基本命令："><a href="#1-基本命令：" class="headerlink" title="1. 基本命令："></a>1. 基本命令：</h2><ol>
+<li><p>ls，list的缩写</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示全部文件，包括隐藏文件</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>列出文件和目录信息</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>cd，change directory的缩写</p>
+</li>
+<li><p>mkdir，make directories的缩写</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-m</td>
+<td>配置所创建目录的权限，如`mkdir -m 777 temp</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>递归建立目录</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>rmdir，remove empty directories，删除空目录</p>
+</li>
+<li><p>touch，创建文件，修改文件时间参数，待补充</p>
+</li>
+</ol>
+<h1 id="2-打包、压缩"><a href="#2-打包、压缩" class="headerlink" title="2. 打包、压缩"></a>2. 打包、压缩</h1><h1 id="3-Vim"><a href="#3-Vim" class="headerlink" title="3.Vim"></a>3.Vim</h1><h2 id="1-三种工作模式"><a href="#1-三种工作模式" class="headerlink" title="1. 三种工作模式"></a>1. 三种工作模式</h2><ol>
+<li><p>命令模式：</p>
+<p>使用vim编辑时，默认出于命令模式，此时可以移动光标，复制、粘贴、替换、删除</p>
+</li>
+<li><p>输入模式：</p>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i</td>
+<td>在当前光标位置开始输入</td>
+</tr>
+<tr>
+<td>l</td>
+<td>来光标所在行的行首开始输入</td>
+</tr>
+<tr>
+<td>o</td>
+<td>在光标所在行的下一行插入新行，开始输入</td>
+</tr>
+<tr>
+<td>A</td>
+<td>在光标所在行的行尾开始输入</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>编辑模式：</p>
+<p>在命令行模式下按“：”。</p>
+<p>从编辑模式返回命令行模式，按“Ecs”</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1267,153 +1419,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/14/git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/14/git/" class="post-title-link" itemprop="url">git</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-07-14 22:10:53" itemprop="dateCreated datePublished" datetime="2021-07-14T22:10:53+08:00">2021-07-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-27 14:08:01" itemprop="dateModified" datetime="2021-08-27T14:08:01+08:00">2021-08-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-基本配置"><a href="#1-基本配置" class="headerlink" title="1. 基本配置"></a>1. 基本配置</h1><ol>
-<li><p>用户名 邮箱</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;  &quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;  &quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>用户名和邮箱尽量与github账号一致，因为网站是根据git客户端的用户名和邮箱来进行contribution统计的，所以，如果不一致，github就无法统计的你贡献。</p>
-<p>而且，可能可以避免一些错误，比如，无法push/pull（报错信息为无权限）</p>
-</li>
-<li><p>系统环境变量（可选）</p>
-</li>
-</ol>
-<h1 id="2-搭建仓库"><a href="#2-搭建仓库" class="headerlink" title="2. 搭建仓库"></a>2. 搭建仓库</h1><ol>
-<li><p>初始化</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></li>
-</ol>
-<ol start="2">
-<li><p>添加到缓存区</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
-
-<p>此处的  <strong>.</strong>  与Linux下的意义一样，表示当前目录，也就是当前目录下的所有文件</p>
-<p>在后续的提交中，各参数</p>
-<p><code>git add -A</code>    提交所有变化</p>
-<p><code> git add -u</code>    提交被修改的和被删除的，不包括新添加的</p>
-<p><code>git add .</code>    提交新文件和被修改的文件，不包括被删除的</p>
-</li>
-<li><p>缓存区到本地仓库</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commmit -m <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>“**-m**”一定要加，“”里面为提交的一些信息，注释。</p>
-</li>
-</ol>
-<h1 id="3-生成公钥"><a href="#3-生成公钥" class="headerlink" title="3. 生成公钥"></a>3. 生成公钥</h1><ol>
-<li><p>生成key</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;youremail&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>pub_key加入到github中</p>
-<p>Pass</p>
-</li>
-<li><p>验证是否成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="4-本地库与远程库互通"><a href="#4-本地库与远程库互通" class="headerlink" title="4. 本地库与远程库互通"></a>4. 本地库与远程库互通</h1><p>两种方式</p>
-<h3 id="1-先克隆，在push"><a href="#1-先克隆，在push" class="headerlink" title="1. 先克隆，在push"></a>1. 先克隆，在push</h3><ol>
-<li>先创建仓库</li>
-<li>将所要push的文件复制到克隆仓库文件夹</li>
-<li><code>git push -u origin master</code></li>
-</ol>
-<h3 id="2-先初始化本地仓库，再推送到远程库"><a href="#2-先初始化本地仓库，再推送到远程库" class="headerlink" title="2. 先初始化本地仓库，再推送到远程库"></a>2. 先初始化本地仓库，再推送到远程库</h3><ol>
-<li><p>创建本地仓库略</p>
-</li>
-<li><p>生成公钥，然后添加到GitHub的公钥库上</p>
-</li>
-<li><p>关联远程仓库</p>
-<p><code> git remote add origin xxxxxx</code></p>
-</li>
-<li><p>git push -u origin master</p>
-<p>注：若为新仓库，没有分支，则添加“-u”参数，有分支，可不添加，直接上传到已创建的分支，必要的时候加上“-f”参数，强制上传。因为如果上传时，远程仓库和本地仓库没有相同的文件，git会认为你操作出错，想要将仓库push到一个与本地仓库无关的仓库。</p>
-<p><code> git push -f origin master:main</code></p>
-</li>
-</ol>
-<h1 id="5-多人协作"><a href="#5-多人协作" class="headerlink" title="5. 多人协作"></a>5. 多人协作</h1><ol>
-<li>如何让github上别的开发者能够修改自己账号下的repository，实现多人协作参与同一个项目，只需要在Settings的Collaborators选项中添加参与者的github账号即可，其实质是将别人github上的公钥写入到当前reposibory的公钥文件中(github帮我们完成，我们无法看到)，这样，其他人也能够修改当前自己账号下的repository了。</li>
-<li>创建team：待完善</li>
-<li>多人协作，如何解决冲突？</li>
-</ol>
-<h1 id="6-gitignore"><a href="#6-gitignore" class="headerlink" title="6. gitignore"></a>6. gitignore</h1><p>如果想把已经push过的某些目录或文件加入忽略规则，则需要先把本地缓存删除（改变为未track状态），然后提交：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&#x27;updata .gitignore&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="7-常见问题"><a href="#7-常见问题" class="headerlink" title="7. 常见问题"></a>7. 常见问题</h1><ol>
-<li><blockquote>
-<p>```bash<br>fatal: unable to access ‘<a target="_blank" rel="noopener" href="https://github.com/caieleven/ML.git/&#39;">https://github.com/caieleven/ML.git/&#39;</a>: OpenSSL SSL_read: Connection was reset, errno 10054</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">解决方法：</span><br><span class="line"></span><br><span class="line">重新设置代理，添加你的代理端口，比如（clash）</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">git config --global http.proxy http://127.0.0.1:7890</span><br><span class="line">git config --global https.proxy http://127.0.0.1:7890</span><br></pre></td></tr></table></figure></blockquote>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1483,7 +1488,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
