@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="几种常见的shell sh、csh、tcsh、ash bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。  Shell变量在Bash shell中，每个变量的值都是字符串。 定义变量Shell支持三种定义变量的方式： 123a&#x3D;valuea&#x3D;&amp;#x27;value&amp;#x27;a&#x3D;&quot;value&quot;   注意：赋值号的周围不能有空格">
+  <meta name="description" content="1. 几种常见的shell sh、csh、tcsh、ash bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。  2. Shell变量在Bash shell中，每个变量的值都是字符串。 定义变量Shell支持三种定义变量的方式： 123a&#x3D;valuea&#x3D;&amp;#x27;value&amp;#x27;a&#x3D;&quot;value&quot;   注意：赋值号的周">
 <meta property="og:type" content="article">
 <meta property="og:title" content="shell">
 <meta property="og:url" content="http://example.com/2021/08/15/shell/index.html">
 <meta property="og:site_name" content="雪堂">
-<meta property="og:description" content="几种常见的shell sh、csh、tcsh、ash bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。  Shell变量在Bash shell中，每个变量的值都是字符串。 定义变量Shell支持三种定义变量的方式： 123a&#x3D;valuea&#x3D;&amp;#x27;value&amp;#x27;a&#x3D;&quot;value&quot;   注意：赋值号的周围不能有空格">
+<meta property="og:description" content="1. 几种常见的shell sh、csh、tcsh、ash bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。  2. Shell变量在Bash shell中，每个变量的值都是字符串。 定义变量Shell支持三种定义变量的方式： 123a&#x3D;valuea&#x3D;&amp;#x27;value&amp;#x27;a&#x3D;&quot;value&quot;   注意：赋值号的周">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-15T13:06:57.000Z">
-<meta property="article:modified_time" content="2021-08-15T15:30:08.628Z">
+<meta property="article:modified_time" content="2021-09-03T06:28:36.857Z">
 <meta property="article:author" content="Caieleven">
 <meta property="article:tag" content="-shell">
 <meta name="twitter:card" content="summary">
@@ -183,10 +183,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-08-15 21:06:57 / Modified: 23:30:08" itemprop="dateCreated datePublished" datetime="2021-08-15T21:06:57+08:00">2021-08-15</time>
+              <time title="Created: 2021-08-15 21:06:57" itemprop="dateCreated datePublished" datetime="2021-08-15T21:06:57+08:00">2021-08-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-03 14:28:36" itemprop="dateModified" datetime="2021-09-03T14:28:36+08:00">2021-09-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -208,11 +214,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="几种常见的shell"><a href="#几种常见的shell" class="headerlink" title="几种常见的shell"></a>几种常见的shell</h1><ul>
+        <h1 id="1-几种常见的shell"><a href="#1-几种常见的shell" class="headerlink" title="1. 几种常见的shell"></a>1. 几种常见的shell</h1><ul>
 <li>sh、csh、tcsh、ash</li>
 <li>bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。</li>
 </ul>
-<h1 id="Shell变量"><a href="#Shell变量" class="headerlink" title="Shell变量"></a>Shell变量</h1><p>在Bash shell中，每个变量的值都是字符串。</p>
+<h1 id="2-Shell变量"><a href="#2-Shell变量" class="headerlink" title="2. Shell变量"></a>2. Shell变量</h1><p>在Bash shell中，每个变量的值都是字符串。</p>
 <h2 id="定义变量"><a href="#定义变量" class="headerlink" title="定义变量"></a>定义变量</h2><p>Shell支持三种定义变量的方式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a=value</span><br><span class="line">a=<span class="string">&#x27;value&#x27;</span></span><br><span class="line">a=<span class="string">&quot;value&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -232,7 +238,7 @@
 <h2 id="只读变量"><a href="#只读变量" class="headerlink" title="只读变量"></a>只读变量</h2><p>我们可以用<code>readonly</code>命令将变量定义为只读变量，如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="string">&quot;fje&quot;</span></span><br><span class="line"><span class="built_in">readonly</span> x</span><br></pre></td></tr></table></figure>
 
-<h1 id="shell特殊变量"><a href="#shell特殊变量" class="headerlink" title="shell特殊变量"></a>shell特殊变量</h1><p>特殊变量列表</p>
+<h2 id="shell特殊变量"><a href="#shell特殊变量" class="headerlink" title="shell特殊变量"></a>shell特殊变量</h2><p>特殊变量列表</p>
 <table>
 <thead>
 <tr>
@@ -269,6 +275,29 @@
 <td>当前Shell进程ID</td>
 </tr>
 </tbody></table>
+<h1 id="3-循环语句"><a href="#3-循环语句" class="headerlink" title="3. 循环语句"></a>3. 循环语句</h1><p>bash shell中提供三种循环方式：for，while，until</p>
+<h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><p>语法结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 变量 <span class="keyword">in</span> 串行</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	执行命令</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>将串行的元素取出，放入变量中，然后重复执行命令，直到所有元素取尽</p>
+<p>eg1:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> &#123;1...10&#125;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	mkdir ddd&#123;a&#125;</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>eg2:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> $(seq 1 10)</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	mkdir ddd&#123;k&#125;</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h2><p>结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> 条件</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	命令</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>eg1:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">declare</span> -i i=1</span><br><span class="line"><span class="built_in">declare</span> -i sum=0</span><br><span class="line"><span class="keyword">while</span> (i&lt;=10)</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	<span class="built_in">let</span> sum+=i</span><br><span class="line">	<span class="built_in">let</span> ++i</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$sum</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="until循环"><a href="#until循环" class="headerlink" title="until循环"></a>until循环</h2><p>结构与while相同。</p>
+<p>但是，while循环条件测试是测真值，until循环是测假值。</p>
 
     </div>
 
@@ -352,7 +381,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84shell"><span class="nav-number">1.</span> <span class="nav-text">几种常见的shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">Shell变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.</span> <span class="nav-text">定义变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">使用变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%8F%98%E9%87%8F"><span class="nav-number">2.3.</span> <span class="nav-text">修改变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E5%91%BD%E4%BB%A4%E7%9A%84%E7%BB%93%E6%9E%9C%E8%B5%8B%E5%80%BC%E7%BB%99%E5%8F%98%E9%87%8F"><span class="nav-number">2.4.</span> <span class="nav-text">将命令的结果赋值给变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AA%E8%AF%BB%E5%8F%98%E9%87%8F"><span class="nav-number">2.5.</span> <span class="nav-text">只读变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell%E7%89%B9%E6%AE%8A%E5%8F%98%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">shell特殊变量</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84shell"><span class="nav-number">1.</span> <span class="nav-text">1. 几种常见的shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Shell%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">2. Shell变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.</span> <span class="nav-text">定义变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">使用变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%8F%98%E9%87%8F"><span class="nav-number">2.3.</span> <span class="nav-text">修改变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E5%91%BD%E4%BB%A4%E7%9A%84%E7%BB%93%E6%9E%9C%E8%B5%8B%E5%80%BC%E7%BB%99%E5%8F%98%E9%87%8F"><span class="nav-number">2.4.</span> <span class="nav-text">将命令的结果赋值给变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AA%E8%AF%BB%E5%8F%98%E9%87%8F"><span class="nav-number">2.5.</span> <span class="nav-text">只读变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell%E7%89%B9%E6%AE%8A%E5%8F%98%E9%87%8F"><span class="nav-number">2.6.</span> <span class="nav-text">shell特殊变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.</span> <span class="nav-text">3. 循环语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#for%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.1.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#while%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.2.</span> <span class="nav-text">while循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#until%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.3.</span> <span class="nav-text">until循环</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
