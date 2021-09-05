@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="参数 解释    –version 显示g++版本   -std&#x3D; -std&#x3D;c++11，使用c++11标准   -O0   -O1 … optimize，优化的四个级别，O3最高（生成的程序的大小和程序的执行速度）   -w 编译时，不显示任何警告信息   -Wall 编译时，显示所有的警告信息   -o  输出编译后的结果到指定的文件file中。Linux默认为a.out，Windows">
+  <meta name="description" content="1. threadstd::thread在头文件中声明。除了构造函数之外，还有一些其他函数：    函数名 用途    get_id 获取线程id   joinable 是否可被join   join    detach    swap    native_handle    hardware_concurrency Return the number of hardware thread con">
 <meta property="og:type" content="article">
-<meta property="og:title" content="g++参数">
-<meta property="og:url" content="http://example.com/2021/08/17/g++%E5%8F%82%E6%95%B0/index.html">
+<meta property="og:title" content="c++并发指南">
+<meta property="og:url" content="http://example.com/2021/09/05/c++%E5%B9%B6%E5%8F%91%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="雪堂">
-<meta property="og:description" content="参数 解释    –version 显示g++版本   -std&#x3D; -std&#x3D;c++11，使用c++11标准   -O0   -O1 … optimize，优化的四个级别，O3最高（生成的程序的大小和程序的执行速度）   -w 编译时，不显示任何警告信息   -Wall 编译时，显示所有的警告信息   -o  输出编译后的结果到指定的文件file中。Linux默认为a.out，Windows">
+<meta property="og:description" content="1. threadstd::thread在头文件中声明。除了构造函数之外，还有一些其他函数：    函数名 用途    get_id 获取线程id   joinable 是否可被join   join    detach    swap    native_handle    hardware_concurrency Return the number of hardware thread con">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-17T08:53:30.000Z">
-<meta property="article:modified_time" content="2021-08-17T09:44:19.032Z">
+<meta property="article:published_time" content="2021-09-05T04:10:40.000Z">
+<meta property="article:modified_time" content="2021-09-05T08:44:28.774Z">
 <meta property="article:author" content="Caieleven">
-<meta property="article:tag" content="g++">
+<meta property="article:tag" content="multi thread">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/08/17/g++%E5%8F%82%E6%95%B0/">
+<link rel="canonical" href="http://example.com/2021/09/05/c++%E5%B9%B6%E5%8F%91%E6%8C%87%E5%8D%97/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>g++参数 | 雪堂</title>
+  <title>c++并发指南 | 雪堂</title>
   
 
 
@@ -161,7 +161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/17/g++%E5%8F%82%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/05/c++%E5%B9%B6%E5%8F%91%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -174,7 +174,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          g++参数
+          c++并发指南
         </h1>
 
         <div class="post-meta">
@@ -185,7 +185,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-08-17 16:53:30 / Modified: 17:44:19" itemprop="dateCreated datePublished" datetime="2021-08-17T16:53:30+08:00">2021-08-17</time>
+              <time title="Created: 2021-09-05 12:10:40 / Modified: 16:44:28" itemprop="dateCreated datePublished" datetime="2021-09-05T12:10:40+08:00">2021-09-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -193,7 +193,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
                 </span>
             </span>
 
@@ -208,46 +208,80 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <table>
+        <h1 id="1-thread"><a href="#1-thread" class="headerlink" title="1. thread"></a>1. thread</h1><p>std::thread在头文件<thread>中声明。除了构造函数之外，还有一些其他函数：</p>
+<table>
 <thead>
 <tr>
-<th>参数</th>
-<th>解释</th>
+<th>函数名</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>–version</td>
-<td>显示g++版本</td>
+<td>get_id</td>
+<td>获取线程id</td>
 </tr>
 <tr>
-<td>-std=</td>
-<td>-std=c++11，使用c++11标准</td>
+<td>joinable</td>
+<td>是否可被join</td>
 </tr>
 <tr>
-<td>-O0   -O1 …</td>
-<td>optimize，优化的四个级别，O3最高（生成的程序的大小和程序的执行速度）</td>
+<td>join</td>
+<td></td>
 </tr>
 <tr>
-<td>-w</td>
-<td>编译时，不显示任何警告信息</td>
+<td>detach</td>
+<td></td>
 </tr>
 <tr>
-<td>-Wall</td>
-<td>编译时，显示所有的警告信息</td>
+<td>swap</td>
+<td></td>
 </tr>
 <tr>
-<td>-o <file></td>
-<td>输出编译后的结果到指定的文件file中。Linux默认为a.out，Windows为a.exe</td>
+<td>native_handle</td>
+<td></td>
 </tr>
 <tr>
-<td>-c</td>
-<td>只进行预处理、编译、汇编操作，生成.o(.obj)文件，不进行链接，如：<br /><code>g++ -c -o hello.o hello.cpp</code></td>
-</tr>
-<tr>
-<td>-I</td>
-<td>指定头文件查找目录，当头文件和源文件不再同一目录时使用该参数</td>
+<td>hardware_concurrency</td>
+<td>Return the number of hardware thread contexts.</td>
 </tr>
 </tbody></table>
+<h1 id="2-mutex"><a href="#2-mutex" class="headerlink" title="2. mutex"></a>2. mutex</h1><h2 id="1-mutex头文件介绍"><a href="#1-mutex头文件介绍" class="headerlink" title="1. mutex头文件介绍"></a>1. mutex头文件介绍</h2><ol>
+<li>Mutex系列（共4类）<ul>
+<li>std::mutex</li>
+<li>另外三种待补全</li>
+</ul>
+</li>
+<li>Lock类（共2类）<ul>
+<li>std::lock_guard</li>
+<li>std::unique_lock</li>
+</ul>
+</li>
+<li>函数<ul>
+<li>std::try_lock</li>
+<li>std::lock</li>
+<li>std::call_once</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-std-mutex简介"><a href="#2-std-mutex简介" class="headerlink" title="2. std::mutex简介"></a>2. std::mutex简介</h2><ol>
+<li>mutex成员函数<ul>
+<li>lock()</li>
+<li>unlock()</li>
+<li>try_lock()：如果互斥量被其他线程占有，则当前线程不会阻塞，会返回false</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-future"><a href="#3-future" class="headerlink" title="3. future"></a>3. future</h1><p>future中包含：</p>
+<ul>
+<li>Providers类：std::promises, std::package_task</li>
+<li>Future类: std::future, shared_future</li>
+<li>Providers函数: std::async()</li>
+</ul>
+<h2 id="1-std-promise介绍"><a href="#1-std-promise介绍" class="headerlink" title="1. std::promise介绍"></a>1. std::promise介绍</h2><p>promise对象可以保存某一类型T的值，该值可被future对象读取。</p>
+<p>可以通过get_future来获取该promise对象相关联的future对象，调用该函数之后，两个对象共享相同的状态。</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_int</span><span class="params">(std::future&lt;<span class="keyword">int</span>&gt;&amp; fut)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = fut.<span class="built_in">get</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;value:&quot;</span> &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::promise&lt;<span class="keyword">int</span>&gt; prom;</span><br><span class="line">    <span class="comment">//和future对象关联</span></span><br><span class="line">    std::future&lt;<span class="keyword">int</span>&gt; fut = prom.<span class="built_in">get_future</span>();</span><br><span class="line">    <span class="comment">//将future交给另外一个线程t</span></span><br><span class="line">    <span class="function">std::thread <span class="title">t</span><span class="params">(print_int, std::ref(fut))</span></span>;</span><br><span class="line">    prom.<span class="built_in">set_value</span>(<span class="number">10</span>);</span><br><span class="line">    t.<span class="built_in">join</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -257,7 +291,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/g/" rel="tag"># g++</a>
+              <a href="/tags/multi-thread/" rel="tag"># multi thread</a>
           </div>
 
         
@@ -266,13 +300,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/08/15/shell/" rel="prev" title="shell">
-      <i class="fa fa-chevron-left"></i> shell
+    <a href="/2021/09/04/Python%E5%B0%8F%E7%9F%A5%E8%AF%86/" rel="prev" title="Python小知识">
+      <i class="fa fa-chevron-left"></i> Python小知识
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/08/19/c++%E6%B3%A8%E9%87%8A/" rel="next" title="c++注释">
-      c++注释 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -331,6 +362,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-thread"><span class="nav-number">1.</span> <span class="nav-text">1. thread</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-mutex"><span class="nav-number">2.</span> <span class="nav-text">2. mutex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-mutex%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.</span> <span class="nav-text">1. mutex头文件介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-std-mutex%E7%AE%80%E4%BB%8B"><span class="nav-number">2.2.</span> <span class="nav-text">2. std::mutex简介</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-future"><span class="nav-number">3.</span> <span class="nav-text">3. future</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-std-promise%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.1.</span> <span class="nav-text">1. std::promise介绍</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

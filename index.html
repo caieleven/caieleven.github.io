@@ -155,6 +155,147 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/05/c++%E5%B9%B6%E5%8F%91%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/05/c++%E5%B9%B6%E5%8F%91%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">c++并发指南</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-05 12:10:40 / Modified: 16:44:28" itemprop="dateCreated datePublished" datetime="2021-09-05T12:10:40+08:00">2021-09-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-thread"><a href="#1-thread" class="headerlink" title="1. thread"></a>1. thread</h1><p>std::thread在头文件<thread>中声明。除了构造函数之外，还有一些其他函数：</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>get_id</td>
+<td>获取线程id</td>
+</tr>
+<tr>
+<td>joinable</td>
+<td>是否可被join</td>
+</tr>
+<tr>
+<td>join</td>
+<td></td>
+</tr>
+<tr>
+<td>detach</td>
+<td></td>
+</tr>
+<tr>
+<td>swap</td>
+<td></td>
+</tr>
+<tr>
+<td>native_handle</td>
+<td></td>
+</tr>
+<tr>
+<td>hardware_concurrency</td>
+<td>Return the number of hardware thread contexts.</td>
+</tr>
+</tbody></table>
+<h1 id="2-mutex"><a href="#2-mutex" class="headerlink" title="2. mutex"></a>2. mutex</h1><h2 id="1-mutex头文件介绍"><a href="#1-mutex头文件介绍" class="headerlink" title="1. mutex头文件介绍"></a>1. mutex头文件介绍</h2><ol>
+<li>Mutex系列（共4类）<ul>
+<li>std::mutex</li>
+<li>另外三种待补全</li>
+</ul>
+</li>
+<li>Lock类（共2类）<ul>
+<li>std::lock_guard</li>
+<li>std::unique_lock</li>
+</ul>
+</li>
+<li>函数<ul>
+<li>std::try_lock</li>
+<li>std::lock</li>
+<li>std::call_once</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-std-mutex简介"><a href="#2-std-mutex简介" class="headerlink" title="2. std::mutex简介"></a>2. std::mutex简介</h2><ol>
+<li>mutex成员函数<ul>
+<li>lock()</li>
+<li>unlock()</li>
+<li>try_lock()：如果互斥量被其他线程占有，则当前线程不会阻塞，会返回false</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-future"><a href="#3-future" class="headerlink" title="3. future"></a>3. future</h1><p>future中包含：</p>
+<ul>
+<li>Providers类：std::promises, std::package_task</li>
+<li>Future类: std::future, shared_future</li>
+<li>Providers函数: std::async()</li>
+</ul>
+<h2 id="1-std-promise介绍"><a href="#1-std-promise介绍" class="headerlink" title="1. std::promise介绍"></a>1. std::promise介绍</h2><p>promise对象可以保存某一类型T的值，该值可被future对象读取。</p>
+<p>可以通过get_future来获取该promise对象相关联的future对象，调用该函数之后，两个对象共享相同的状态。</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_int</span><span class="params">(std::future&lt;<span class="keyword">int</span>&gt;&amp; fut)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = fut.<span class="built_in">get</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;value:&quot;</span> &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::promise&lt;<span class="keyword">int</span>&gt; prom;</span><br><span class="line">    <span class="comment">//和future对象关联</span></span><br><span class="line">    std::future&lt;<span class="keyword">int</span>&gt; fut = prom.<span class="built_in">get_future</span>();</span><br><span class="line">    <span class="comment">//将future交给另外一个线程t</span></span><br><span class="line">    <span class="function">std::thread <span class="title">t</span><span class="params">(print_int, std::ref(fut))</span></span>;</span><br><span class="line">    prom.<span class="built_in">set_value</span>(<span class="number">10</span>);</span><br><span class="line">    t.<span class="built_in">join</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/04/Python%E5%B0%8F%E7%9F%A5%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1175,136 +1316,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/11/cmake%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/11/cmake%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">cmake常用命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-11 20:55:12 / Modified: 21:00:20" itemprop="dateCreated datePublished" datetime="2021-08-11T20:55:12+08:00">2021-08-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="cmake常用指令"><a href="#cmake常用指令" class="headerlink" title="cmake常用指令"></a>cmake常用指令</h1><ol>
-<li>cmake_minimum_required  指定CMake的最小版本要求</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">2.8</span>.<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>project  定义工程名称</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">project</span>(HI)</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>set  定义变量</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(SRC sayhello.cpp hello.cpp)</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>include_directories  向工程添加多个特定的头文件搜索路径</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_directories</span>(/usr/<span class="keyword">include</span>/myincludefolder ./<span class="keyword">include</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>link_directories - 向工程添加多个特定的库文件搜索路径</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">link_directories</span>(/usr/lib/mylibfolder ./lib)</span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>add_library - 生成库文件</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(hello SHARED <span class="variable">$&#123;SRC&#125;</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="7">
-<li>add_compile_options - 添加编译参数</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_compile_options</span>(-Wall -std=c++<span class="number">11</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="8">
-<li>add_executable - 生成可执行文件</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(main main.cpp)</span><br></pre></td></tr></table></figure>
-
-<ol start="9">
-<li>target_link_libraries - 为 target 添加需要链接的共享库</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(main hello)</span><br></pre></td></tr></table></figure>
-
-<ol start="10">
-<li>add_subdirectory - 向当前工程添加存放源文件的子目录</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(src)</span><br></pre></td></tr></table></figure>
-
-<ol start="11">
-<li>aux_source_directory - 发现一个目录下所有的源代码文件并将列表存储在一个变量中</li>
-</ol>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aux_source_directory(. SRC)</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1374,7 +1385,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1387,7 +1398,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
