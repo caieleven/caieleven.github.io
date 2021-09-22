@@ -155,6 +155,322 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/22/epoll/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/22/epoll/" class="post-title-link" itemprop="url">epoll</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-22 21:54:21 / Modified: 22:28:08" itemprop="dateCreated datePublished" datetime="2021-09-22T21:54:21+08:00">2021-09-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h1><p>epoll是一种I/O事件通知机制，是linux内核实现IO多路复用的重要手段。</p>
+<p>IO多路复用是指，在一个操作里同时监听多个输入输出源，在其中一个或多个输入输出源可用的时候返回，然后对其经进行读写操作。</p>
+<p>可读事件，就是当文件描述符关联的内核读缓冲区可读（就是内核缓冲区非空），则触发可读事件。</p>
+<p>可写事件，当文件描述符关联的内核写缓冲区可写（内核缓冲区不满，有空闲空间可以写入），则触发可写事件。</p>
+<p>所以，epoll就是当文件描述符的内核缓冲区非空时，发出可读信号，可写缓冲区不满时，发出可写信号。</p>
+<h1 id="2-重要API"><a href="#2-重要API" class="headerlink" title="2. 重要API"></a>2. 重要API</h1><h2 id="1-int-epoll-create-int-size"><a href="#1-int-epoll-create-int-size" class="headerlink" title="1. int epoll_create(int size)"></a>1. int epoll_create(int size)</h2><p>产生一个epoll实例数据结构并返回一个文件描述符（epoll实例的句柄）。</p>
+<p>参数size表示所要监视文件描述符的最大值。</p>
+<h2 id="2-int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event"><a href="#2-int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event" class="headerlink" title="2. int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)"></a>2. int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)</h2><p>将被监听的描述符添加到红黑树或从红黑树中删除，又或者是对监听事件进行修改。</p>
+<h3 id="1-参数op说明操作类型："><a href="#1-参数op说明操作类型：" class="headerlink" title="1. 参数op说明操作类型："></a>1. 参数op说明操作类型：</h3><p>EPOLL_CTL_ADD：<br>EPOLL_CTL_DEL<br>EPOLL_CTL_MOD</p>
+<h3 id="2-struct-epoll-event"><a href="#2-struct-epoll-event" class="headerlink" title="2. struct epoll_event"></a>2. struct epoll_event</h3><p>描述一个文件描述符的epoll行为。其中，数据结构如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> events;</span><br><span class="line">    <span class="keyword">epoll_data_t</span> data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">union</span> <span class="title">epoll_data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">void</span> *ptr;</span><br><span class="line">    <span class="keyword">int</span> fd;</span><br><span class="line">    <span class="keyword">uint32_t</span> u32;</span><br><span class="line">    <span class="keyword">uint64_t</span> u64;</span><br><span class="line">&#125;<span class="keyword">epoll_data_t</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在使用epoll_wait函数返回处于ready状态的描述符列表时，data域时唯一能给出描述符信息的字段，所以，在调用epoll_ctl加入一个需要检测的描述符时，一定要在此域写入描述符相关信息。</p>
+<p>events域是bit mask，描述一组epoll事件，在epoll_ctl调用中解释为：描述符所期望的epoll事件，可多选。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/22/json/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/22/json/" class="post-title-link" itemprop="url">json</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-22 21:00:43 / Modified: 21:54:30" itemprop="dateCreated datePublished" datetime="2021-09-22T21:00:43+08:00">2021-09-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c-c/" itemprop="url" rel="index"><span itemprop="name">c/c++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-json数组"><a href="#1-json数组" class="headerlink" title="1. json数组"></a>1. json数组</h1><p>json数组用[]表示，逗号分隔，数组中，元素类型可以不一致</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">[<span class="string">&quot;app&quot;</span>, <span class="string">&quot;chen&quot;</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="literal">true</span>, <span class="string">&quot;hello&quot;</span>, <span class="literal">null</span>]</span><br><span class="line">[</span><br><span class="line">    [<span class="string">&quot;cat, dog&quot;</span>], </span><br><span class="line">    [<span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;fjei&quot;</span>]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-json对象"><a href="#2-json对象" class="headerlink" title="2. json对象"></a>2. json对象</h1><p>用{}描述，每个元素为一个键值对，元素逗号分隔。</p>
+<blockquote>
+<p><em>ps</em>：一个json文件中，最外层只能有一个大的数据类型，比如只有一个json数组，或者只有一个json对象</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/share-prt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/15/share-prt/" class="post-title-link" itemprop="url">share_prt</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-15 10:48:36 / Modified: 11:17:44" itemprop="dateCreated datePublished" datetime="2021-09-15T10:48:36+08:00">2021-09-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c-c/" itemprop="url" rel="index"><span itemprop="name">c/c++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-shred-ptr"><a href="#1-shred-ptr" class="headerlink" title="1. shred_ptr"></a>1. shred_ptr</h1><p>智能指针和普通指针的用法是相似的，不同之处在于，智能指针可以在适当的实际自动释放分配的内存。</p>
+<p>智能指针位于<memory>头文件中。</p>
+<p>多个shared_prt可以指向同一块堆内存。如果某一个指针放弃堆内存的“使用权”，也不会影响其他指针。</p>
+<h2 id="1-创建"><a href="#1-创建" class="headerlink" title="1. 创建"></a>1. 创建</h2><p>有很多创建方法，例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">std::shared_ptr&lt;<span class="keyword">int</span>&gt; p1;</span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span><span class="params">(null)</span></span>;</span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="keyword">int</span>&gt; <span class="title">p3</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">10</span>))</span></span>;</span><br><span class="line">std::shared_ptr&lt;<span class="keyword">int</span>&gt; p4 = std::make_shared&lt;<span class="keyword">int</span>&gt;(<span class="number">10</span>);</span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="keyword">int</span>&gt; <span class="title">p5</span><span class="params">(p4)</span></span>;</span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="keyword">int</span>&gt; <span class="title">p6</span><span class="params">(std::move(p5))</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>但是，这样的操作不被允许：<br>同一普通指针不能同时为多个shared_ptr赋值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* ptr = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="keyword">int</span>&gt; <span class="title">p1</span><span class="params">(ptr)</span></span>;</span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="keyword">int</span>&gt; <span class="title">p2</span><span class="params">(ptr)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-释放"><a href="#2-释放" class="headerlink" title="2. 释放"></a>2. 释放</h2><p>我们可以在初始化的时候，自定义所指对内存的释放规则。有时候，这种自定义很有必要，比如，默认的释放规则不支持释放数组。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::shared_ptr&lt;<span class="keyword">int</span>&gt; <span class="title">ptr</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>], std::default_delete&lt;<span class="keyword">int</span>[]&gt;())</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteInt</span><span class="params">(<span class="keyword">int</span> *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> []p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="keyword">int</span>&gt; <span class="title">pp</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>], deleteInt)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="keyword">int</span>&gt; <span class="title">ppp</span><span class="params">(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>], [](<span class="keyword">int</span> *p) &#123;<span class="keyword">delete</span> []p;&#125;)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3. 成员方法"></a>3. 成员方法</h2><h1 id="2-make-shared"><a href="#2-make-shared" class="headerlink" title="2. make_shared"></a>2. make_shared</h1><p><code>std::make_shared</code>可以返回一个值定类型的<code>std::shared_ptr</code>，相比于它的构造函数，使用前者的好处在于效率更高。</p>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><ol>
+<li><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7898.html">c++11 shared_ptr</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/c++11%E4%B8%ADlambda-std-function-std-bind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/15/c++11%E4%B8%ADlambda-std-function-std-bind/" class="post-title-link" itemprop="url">c++11中lambda, std::function, std::bind</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-15 08:20:06 / Modified: 08:46:02" itemprop="dateCreated datePublished" datetime="2021-09-15T08:20:06+08:00">2021-09-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c-c/" itemprop="url" rel="index"><span itemprop="name">c/c++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://paul.pub/cpp-lambda-function-bind/">reference</a></p>
+<h1 id="1-lambda"><a href="#1-lambda" class="headerlink" title="1. lambda"></a>1. lambda</h1><p>基本语法</p>
+<p><code>[capture-list] &#123; body &#125;</code></p>
+<p><code>[capture-list] (params) &#123;body&#125;</code></p>
+<p>实例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; numbers = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>&#125;</span><br><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">std::for_each(numbers.<span class="built_in">begin</span>(), numbers.<span class="built_in">end</span>(), [&amp;sum] (<span class="keyword">const</span> <span class="keyword">int</span>&amp; i) &#123;sum += i&#125;);</span><br><span class="line">cout &lt;&lt; sum &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-std-function"><a href="#2-std-function" class="headerlink" title="2. std::function"></a>2. std::function</h1><p>基本语法</p>
+<p><code> template &lt;class Ret, class... Args&gt; class function&lt;Ret (Args...)&gt;</code></p>
+<h1 id="3-闭包-TODO"><a href="#3-闭包-TODO" class="headerlink" title="3. 闭包 @TODO"></a>3. 闭包 @TODO</h1><h1 id="4-std-bind"><a href="#4-std-bind" class="headerlink" title="4. std::bind"></a>4. std::bind</h1><p>基本语法</p>
+<p><code>template &lt;class Fn, class... Args&gt; bind(Fn&amp;&amp; fn, Args&amp;&amp;... args);</code></p>
+<p>实例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBetween</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> min, <span class="keyword">int</span> max)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i &gt;= min &amp;&amp; i &lt;= max;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function&lt;<span class="built_in"><span class="keyword">bool</span></span> (<span class="keyword">int</span>)&gt; filter = std::<span class="built_in">bind</span>(isBetween, placeholder::_1, <span class="number">20</span>, <span class="number">40</span>);</span><br><span class="line"><span class="built_in">printNumber</span>(numbers, filter);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; number, function&lt;<span class="keyword">bool</span>&gt; (<span class="keyword">int</span>) filter)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">int</span>&amp; i:number)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">filter</span>(i))</span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/12/socket/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -178,10 +494,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-09-12 15:00:44 / Modified: 18:14:47" itemprop="dateCreated datePublished" datetime="2021-09-12T15:00:44+08:00">2021-09-12</time>
+              <time title="Created: 2021-09-12 15:00:44" itemprop="dateCreated datePublished" datetime="2021-09-12T15:00:44+08:00">2021-09-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-13 23:36:18" itemprop="dateModified" datetime="2021-09-13T23:36:18+08:00">2021-09-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -243,6 +565,7 @@
 <h2 id="1-bind"><a href="#1-bind" class="headerlink" title="1. bind"></a>1. bind</h2><h3 id="1-函数原型："><a href="#1-函数原型：" class="headerlink" title="1. 函数原型："></a>1. 函数原型：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sock, struct sockaddr *addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;	<span class="comment">//Linux</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(SOCKET sock, <span class="keyword">const</span> struct sockaddr *addr, <span class="keyword">int</span> addrlen)</span></span>;	<span class="comment">//Windows</span></span><br></pre></td></tr></table></figure>
 
 <p>其中，sock为socket文件描述符，addr为sockaddr结构体变量的指针，addrlen为addr变量的大小，一般用sizeof算出。</p>
+<p>server端绑定”127.0.0.1”时，如果其他主机作为client端访问，便会connect失败。</p>
 <h3 id="2-示例："><a href="#2-示例：" class="headerlink" title="2. 示例："></a>2. 示例：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建套接字</span></span><br><span class="line"><span class="keyword">int</span> serv_sock = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, IPPROTO_TCP);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建sockaddr_in结构体变量</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">serv_addr</span>;</span></span><br><span class="line"><span class="built_in">memset</span>(&amp;serv_addr, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(serv_addr));  <span class="comment">//每个字节都用0填充</span></span><br><span class="line">serv_addr.sin_family = AF_INET;  <span class="comment">//使用IPv4地址</span></span><br><span class="line">serv_addr.sin_addr.s_addr = <span class="built_in">inet_addr</span>(<span class="string">&quot;127.0.0.1&quot;</span>);  <span class="comment">//具体的IP地址</span></span><br><span class="line">serv_addr.sin_port = <span class="built_in">htons</span>(<span class="number">1234</span>);  <span class="comment">//端口</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//将套接字和IP、端口绑定</span></span><br><span class="line"><span class="built_in">bind</span>(serv_sock, (struct sockaddr*)&amp;serv_addr, <span class="built_in"><span class="keyword">sizeof</span></span>(serv_addr));</span><br></pre></td></tr></table></figure>
 
 <h3 id="3-sockaddr-in结构体"><a href="#3-sockaddr-in结构体" class="headerlink" title="3. sockaddr_in结构体"></a>3. sockaddr_in结构体</h3><p>结构体成员变量：</p>
@@ -303,6 +626,16 @@
 <p>sock为要发送数据的套接字，buf为要发送的数据的缓冲区，len为数据的自己输，flags通常设置为0或NULL，以后再补充。</p>
 <p>接收为：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">recv</span><span class="params">(SOCKET sock, <span class="keyword">char</span> *buf, <span class="keyword">int</span> len, <span class="keyword">int</span> flags)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h1 id="杂"><a href="#杂" class="headerlink" title="杂"></a>杂</h1><h1 id="1-windows下，cmake添加winsock"><a href="#1-windows下，cmake添加winsock" class="headerlink" title="1. windows下，cmake添加winsock"></a>1. windows下，cmake添加winsock</h1><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(MyExe main.cpp)</span><br><span class="line"><span class="keyword">if</span>(WIN32)</span><br><span class="line">  <span class="keyword">target_link_libraries</span>(MyExe wsock32 ws2_32)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
 
 
 
@@ -422,10 +755,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-09-05 12:10:40 / Modified: 16:44:28" itemprop="dateCreated datePublished" datetime="2021-09-05T12:10:40+08:00">2021-09-05</time>
+              <time title="Created: 2021-09-05 12:10:40" itemprop="dateCreated datePublished" datetime="2021-09-05T12:10:40+08:00">2021-09-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-15 09:00:13" itemprop="dateModified" datetime="2021-09-15T09:00:13+08:00">2021-09-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -521,6 +860,31 @@
 <p>例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_int</span><span class="params">(std::future&lt;<span class="keyword">int</span>&gt;&amp; fut)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = fut.<span class="built_in">get</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;value:&quot;</span> &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::promise&lt;<span class="keyword">int</span>&gt; prom;</span><br><span class="line">    <span class="comment">//和future对象关联</span></span><br><span class="line">    std::future&lt;<span class="keyword">int</span>&gt; fut = prom.<span class="built_in">get_future</span>();</span><br><span class="line">    <span class="comment">//将future交给另外一个线程t</span></span><br><span class="line">    <span class="function">std::thread <span class="title">t</span><span class="params">(print_int, std::ref(fut))</span></span>;</span><br><span class="line">    prom.<span class="built_in">set_value</span>(<span class="number">10</span>);</span><br><span class="line">    t.<span class="built_in">join</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p><a target="_blank" rel="noopener" href="https://changkun.de/modern-cpp/zh-cn/07-thread/index.html#7-3-%E6%9C%9F%E7%89%A9">并行与并发</a></p>
 
       
     </div>
@@ -710,10 +1074,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-08-28 11:31:45 / Modified: 23:12:02" itemprop="dateCreated datePublished" datetime="2021-08-28T11:31:45+08:00">2021-08-28</time>
+              <time title="Created: 2021-08-28 11:31:45" itemprop="dateCreated datePublished" datetime="2021-08-28T11:31:45+08:00">2021-08-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-14 23:48:34" itemprop="dateModified" datetime="2021-09-14T23:48:34+08:00">2021-09-14</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -739,473 +1109,27 @@
 <h1 id="1-相关知识"><a href="#1-相关知识" class="headerlink" title="1.相关知识"></a>1.相关知识</h1><ol>
 <li>同一进程中的多个线程共享相同的地址空间，可以访问进程中的大部分数据，指针和引用可以在线程间传递。</li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/27/Linux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/27/Linux/" class="post-title-link" itemprop="url">Linux.md</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-08-27 23:29:19" itemprop="dateCreated datePublished" datetime="2021-08-27T23:29:19+08:00">2021-08-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-28 00:31:54" itemprop="dateModified" datetime="2021-08-28T00:31:54+08:00">2021-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-文件和目录管理"><a href="#1-文件和目录管理" class="headerlink" title="1. 文件和目录管理"></a>1. 文件和目录管理</h1><h2 id="1-基本命令："><a href="#1-基本命令：" class="headerlink" title="1. 基本命令："></a>1. 基本命令：</h2><ol>
-<li><p>ls，list的缩写</p>
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-a</td>
-<td>显示全部文件，包括隐藏文件</td>
-</tr>
-<tr>
-<td>-l</td>
-<td>列出文件和目录信息</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>cd，change directory的缩写</p>
-</li>
-<li><p>mkdir，make directories的缩写</p>
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-m</td>
-<td>配置所创建目录的权限，如`mkdir -m 777 temp</td>
-</tr>
-<tr>
-<td>-p</td>
-<td>递归建立目录</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>rmdir，remove empty directories，删除空目录</p>
-</li>
-<li><p>touch，创建文件，修改文件时间参数，待补充</p>
-</li>
-</ol>
-<h1 id="2-打包、压缩"><a href="#2-打包、压缩" class="headerlink" title="2. 打包、压缩"></a>2. 打包、压缩</h1><h1 id="3-Vim"><a href="#3-Vim" class="headerlink" title="3.Vim"></a>3.Vim</h1><h2 id="1-三种工作模式"><a href="#1-三种工作模式" class="headerlink" title="1. 三种工作模式"></a>1. 三种工作模式</h2><ol>
-<li><p>命令模式：</p>
-<p>使用vim编辑时，默认出于命令模式，此时可以移动光标，复制、粘贴、替换、删除</p>
-</li>
-<li><p>输入模式：</p>
-<table>
-<thead>
-<tr>
-<th>快捷键</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>i</td>
-<td>在当前光标位置开始输入</td>
-</tr>
-<tr>
-<td>l</td>
-<td>来光标所在行的行首开始输入</td>
-</tr>
-<tr>
-<td>o</td>
-<td>在光标所在行的下一行插入新行，开始输入</td>
-</tr>
-<tr>
-<td>A</td>
-<td>在光标所在行的行尾开始输入</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>编辑模式：</p>
-<p>在命令行模式下按“：”。</p>
-<p>从编辑模式返回命令行模式，按“Ecs”</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/" class="post-title-link" itemprop="url">c++左右值</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-22 15:22:03 / Modified: 15:43:02" itemprop="dateCreated datePublished" datetime="2021-08-22T15:22:03+08:00">2021-08-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-什么是左值右值"><a href="#1-什么是左值右值" class="headerlink" title="1. 什么是左值右值"></a>1. 什么是左值右值</h1><p>在c++中，左值与右值定义较c而言，不同。</p>
-<p>根据《c++ Primer》中的说法：</p>
-<blockquote>
-<p>一个表达式是左值还是右值，取决于我们使用的是它的值还是它在内存中的位置。</p>
-</blockquote>
-<p>在c++中，左右值有个重要特点：</p>
-<blockquote>
-<ul>
-<li>左值存放在对象中，有持久的状态。</li>
-<li>右值要么是字面常量，要么是在表达式求值过程中创建的临时对象，没有持久的状态。</li>
+<h1 id="多线程通信和同步"><a href="#多线程通信和同步" class="headerlink" title="多线程通信和同步"></a>多线程通信和同步</h1><h2 id="1-线程状态"><a href="#1-线程状态" class="headerlink" title="1. 线程状态"></a>1. 线程状态</h2><ul>
+<li>初始化  init</li>
+<li>就绪  Ready</li>
+<li>运行 running</li>
+<li>阻塞 blocked</li>
 </ul>
-</blockquote>
-<h1 id="2-左值引用与右值引用"><a href="#2-左值引用与右值引用" class="headerlink" title="2. 左值引用与右值引用"></a>2. 左值引用与右值引用</h1><p>左值引用时常见的引用，我们一般所说的引用就是左值引用，左值引用就是将一个对象的内存空间绑定到另一个变量上。根据定义，可以看到，我们在创建引用时，使用的是一个对象在内存中的位置，这个对象就是左值，因此，我们不能将一个右值绑定到左值引用上。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> temp = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;atemp = temp;		<span class="comment">//正确</span></span><br><span class="line"><span class="keyword">int</span> &amp;btemp = <span class="number">1</span>;			<span class="comment">//错误</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-锁"><a href="#1-锁" class="headerlink" title="1. 锁"></a>1. 锁</h2><p>自动释放锁</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#inlcude <span class="meta-string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CMutex</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="built_in">CMutex</span>(mutex&amp; mux):<span class="built_in">mux_</span>(mux)</span><br><span class="line">    &#123;</span><br><span class="line">        mux_.<span class="built_in">lock</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">CMutex</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        mux_.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    mutex&amp; mxu_;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>另外，由于常量左值引用保证我们不可以通过引用改变内存空c间的值，所以，我们可以将右值绑定到常量引用上。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; ctemp = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 
-<p>右值引用的声明方法与左值不同，它只能绑定到右值上。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; atemp = a;		<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">int</span> &amp;&amp; btemp = <span class="number">1</span>;		<span class="comment">//正确</span></span><br></pre></td></tr></table></figure>
 
-<p>由于右值引用只能绑定到右值上，根据前面所介绍的右值特性：</p>
-<blockquote>
-<p>右值引用的对象，是临时的，即将被销毁，并且，右值引用的对象，不会在其它地方使用。</p>
-</blockquote>
-<p>所以：</p>
-<p><strong>接收和使用右值引用的代码，可以自由接管所引用的对象的资源，而无需担心对其他代码逻辑造成数据破坏</strong></p>
+<h2 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestFuture</span><span class="params">(promise&lt;string&gt; p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p.<span class="built_in">set_value</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    promise&lt;string&gt; p;</span><br><span class="line">    <span class="keyword">auto</span> future = p.<span class="built_in">get_future</span>();</span><br><span class="line">    <span class="keyword">auto</span> th = <span class="built_in">thread</span>(TestFrture, <span class="built_in">move</span>(p));</span><br><span class="line">    future.<span class="built_in">get</span>();</span><br><span class="line">    </span><br><span class="line">    th.<span class="built_in">join</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/19/c++%E6%B3%A8%E9%87%8A/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/19/c++%E6%B3%A8%E9%87%8A/" class="post-title-link" itemprop="url">c++注释</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-19 13:53:54 / Modified: 14:04:04" itemprop="dateCreated datePublished" datetime="2021-08-19T13:53:54+08:00">2021-08-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>常见注释关键词</p>
-<table>
-<thead>
-<tr>
-<th>关键词</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>@brief</td>
-<td>简介，简单介绍函数作用</td>
-</tr>
-<tr>
-<td>@param</td>
-<td>介绍函数参数</td>
-</tr>
-<tr>
-<td>@return</td>
-<td>返回类型说明</td>
-</tr>
-<tr>
-<td>@author</td>
-<td>作者</td>
-</tr>
-<tr>
-<td>@date</td>
-<td>时间</td>
-</tr>
-<tr>
-<td>@version</td>
-<td>版本</td>
-</tr>
-<tr>
-<td>@exception</td>
-<td>可能抛出的异常</td>
-</tr>
-<tr>
-<td>TODO(负责人)</td>
-<td>有待修改和编写的地方</td>
-</tr>
-</tbody></table>
-<p>例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * \brief Pushes a list of key-value pairs to all server nodes.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This function pushes a KV list specified by \a keys and \a vals to all</span></span><br><span class="line"><span class="comment"> * server nodes.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Sample usage: the following codes push two KV pairs `&#123;1, (1.1, 1.2)&#125;` and `&#123;3,</span></span><br><span class="line"><span class="comment"> * (3.1,3.2)&#125;` to server nodes, where the value is a length-2 float vector</span></span><br><span class="line"><span class="comment"> * \code</span></span><br><span class="line"><span class="comment"> *   KVWorker&lt;float&gt; w;</span></span><br><span class="line"><span class="comment"> *   std::vector&lt;Key&gt; keys = &#123;1, 3&#125;;</span></span><br><span class="line"><span class="comment"> *   std::vector&lt;float&gt; vals = &#123;1.1, 1.2, 3.1, 3.2&#125;;</span></span><br><span class="line"><span class="comment"> *   w.Push(keys, vals);</span></span><br><span class="line"><span class="comment"> * \endcode</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * The KV list is partitioned and sent based on the key range each server</span></span><br><span class="line"><span class="comment"> * maintaining. </span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param keys a list of keys, must be unique and sorted in increasing order</span></span><br><span class="line"><span class="comment"> * @return the timestamp of this request</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>来自ps-lite</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/17/g++%E5%8F%82%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/17/g++%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">g++参数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-17 16:53:30 / Modified: 17:44:19" itemprop="dateCreated datePublished" datetime="2021-08-17T16:53:30+08:00">2021-08-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <table>
-<thead>
-<tr>
-<th>参数</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>–version</td>
-<td>显示g++版本</td>
-</tr>
-<tr>
-<td>-std=</td>
-<td>-std=c++11，使用c++11标准</td>
-</tr>
-<tr>
-<td>-O0   -O1 …</td>
-<td>optimize，优化的四个级别，O3最高（生成的程序的大小和程序的执行速度）</td>
-</tr>
-<tr>
-<td>-w</td>
-<td>编译时，不显示任何警告信息</td>
-</tr>
-<tr>
-<td>-Wall</td>
-<td>编译时，显示所有的警告信息</td>
-</tr>
-<tr>
-<td>-o <file></td>
-<td>输出编译后的结果到指定的文件file中。Linux默认为a.out，Windows为a.exe</td>
-</tr>
-<tr>
-<td>-c</td>
-<td>只进行预处理、编译、汇编操作，生成.o(.obj)文件，不进行链接，如：<br /><code>g++ -c -o hello.o hello.cpp</code></td>
-</tr>
-<tr>
-<td>-I</td>
-<td>指定头文件查找目录，当头文件和源文件不再同一目录时使用该参数</td>
-</tr>
-</tbody></table>
+<h1 id="线程池实现"><a href="#线程池实现" class="headerlink" title="线程池实现"></a>线程池实现</h1><h1 id="杂"><a href="#杂" class="headerlink" title="杂"></a>杂</h1><ol>
+<li><p>调用一次</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Calloncefunction</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">static</span> std::once_flag = flag;</span><br><span class="line">    std::<span class="built_in">call_once</span>(flag, Calloncefunction);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
@@ -1224,7 +1148,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1290,7 +1214,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1303,7 +1227,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
