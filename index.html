@@ -155,6 +155,153 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/23/c++%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/23/c++%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">c++文件操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-23 10:58:15 / Modified: 12:27:31" itemprop="dateCreated datePublished" datetime="2021-09-23T10:58:15+08:00">2021-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c-c/" itemprop="url" rel="index"><span itemprop="name">c/c++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="c-流的继承类型"><a href="#c-流的继承类型" class="headerlink" title="c++流的继承类型"></a>c++流的继承类型</h1><p>见 <strong>砖头</strong> 相册</p>
+<h1 id="打开与关闭文件"><a href="#打开与关闭文件" class="headerlink" title="打开与关闭文件"></a>打开与关闭文件</h1><h2 id="1-通过流对象调用open打开。"><a href="#1-通过流对象调用open打开。" class="headerlink" title="1. 通过流对象调用open打开。"></a>1. 通过流对象调用open打开。</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* filename, openmode mode)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>其中，mode类型</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ios::out</td>
+<td>文件以输出方式打开</td>
+</tr>
+<tr>
+<td>ios::in</td>
+<td></td>
+</tr>
+<tr>
+<td>ios::ate</td>
+<td>初始位置：文件尾</td>
+</tr>
+<tr>
+<td>ios::app</td>
+<td>所有输出附加在文件尾部</td>
+</tr>
+<tr>
+<td>ios::trunc</td>
+<td>如果文件已存在，则先删除该文件</td>
+</tr>
+<tr>
+<td>ios::binary</td>
+<td>二进制方式</td>
+</tr>
+</tbody></table>
+<p>这些方式可以组合使用，中间以“或”操作符间隔，（**|**），例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file.<span class="built_in">open</span>(<span class="string">&quot;aaa.bin&quot;</span>, ios::out|ios::binary)</span><br></pre></td></tr></table></figure>
+
+<p>一些流类的成员函数都有默认的打开方式</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ofstream</td>
+<td>ios::out|ios::trunc</td>
+</tr>
+<tr>
+<td>ifstream</td>
+<td>ios::in</td>
+</tr>
+<tr>
+<td>fstream</td>
+<td>ios::in|ios::out</td>
+</tr>
+</tbody></table>
+<h2 id="2-通过类对象构造函数打开文件"><a href="#2-通过类对象构造函数打开文件" class="headerlink" title="2. 通过类对象构造函数打开文件"></a>2. 通过类对象构造函数打开文件</h2><p>与open拥有同样的参数，略。</p>
+<blockquote>
+<p>可以通过is_open()验证是否打开文件。</p>
+</blockquote>
+<h2 id="3-关闭文件"><a href="#3-关闭文件" class="headerlink" title="3. 关闭文件"></a>3. 关闭文件</h2><p>操作完毕，需关闭文件，调用close()函数。此函数调用后，原来的流对象可以用来打开其他文件。</p>
+<h1 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h1><h2 id="1-文本文件"><a href="#1-文本文件" class="headerlink" title="1. 文本文件"></a>1. 文本文件</h2><p>简单使用插入器(&gt;&gt;) 与析取器(&lt;&lt;)即可。</p>
+<p>同时，可以用eof()验证是否到文件末尾。</p>
+<ol>
+<li><p>空白字符分隔的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 1 1 </span><br><span class="line">2 2 2 2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">100</span>];</span><br><span class="line"><span class="function">ifstream <span class="title">file</span><span class="params">(<span class="string">&quot;xx.txt&quot;</span>, ios::in)</span></span>;</span><br><span class="line"><span class="keyword">int</span> temp;</span><br><span class="line"><span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(file &gt;&gt; temp)</span><br><span class="line">    arr[pos++] = x;</span><br><span class="line">file.<span class="built_in">close</span>();</span><br></pre></td></tr></table></figure></li>
+<li><p>逗号分隔</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1, 1, 1</span><br><span class="line">2, 3, 4</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="function">ifstream <span class="title">file</span><span class="params">(<span class="string">&quot;sss.csv&quot;</span>, ios::in)</span></span>;</span><br><span class="line">string line;</span><br><span class="line"><span class="keyword">while</span>(<span class="built_in">getline</span>(file, line))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function">istringstream <span class="title">sin</span><span class="params">(line)</span></span>;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; temp;</span><br><span class="line">    string tmp;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">getline</span>(sin, tmp, <span class="string">&#x27;,&#x27;</span>))</span><br><span class="line">        temp.<span class="built_in">push_back</span>(<span class="built_in">stoi</span>(tmp));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>read与write数据</p>
+<p>这种一般用于二进制文件的读写。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">write</span>(<span class="keyword">char</span>* buffer, streamsize size);</span><br><span class="line"><span class="built_in">read</span>(<span class="keyword">char</span>* buffer, streamsize size);</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/22/epoll/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1047,104 +1194,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/28/c++%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/28/c++%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">c++多线程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-08-28 11:31:45" itemprop="dateCreated datePublished" datetime="2021-08-28T11:31:45+08:00">2021-08-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-14 23:48:34" itemprop="dateModified" datetime="2021-09-14T23:48:34+08:00">2021-09-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>thread创建线程时，会复制参数，如果参数类型是自定义的某个类，是否需要重写深拷</p>
-<h1 id="1-相关知识"><a href="#1-相关知识" class="headerlink" title="1.相关知识"></a>1.相关知识</h1><ol>
-<li>同一进程中的多个线程共享相同的地址空间，可以访问进程中的大部分数据，指针和引用可以在线程间传递。</li>
-</ol>
-<h1 id="多线程通信和同步"><a href="#多线程通信和同步" class="headerlink" title="多线程通信和同步"></a>多线程通信和同步</h1><h2 id="1-线程状态"><a href="#1-线程状态" class="headerlink" title="1. 线程状态"></a>1. 线程状态</h2><ul>
-<li>初始化  init</li>
-<li>就绪  Ready</li>
-<li>运行 running</li>
-<li>阻塞 blocked</li>
-</ul>
-<h2 id="1-锁"><a href="#1-锁" class="headerlink" title="1. 锁"></a>1. 锁</h2><p>自动释放锁</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#inlcude <span class="meta-string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CMutex</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="built_in">CMutex</span>(mutex&amp; mux):<span class="built_in">mux_</span>(mux)</span><br><span class="line">    &#123;</span><br><span class="line">        mux_.<span class="built_in">lock</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">CMutex</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        mux_.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    mutex&amp; mxu_;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestFuture</span><span class="params">(promise&lt;string&gt; p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p.<span class="built_in">set_value</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    promise&lt;string&gt; p;</span><br><span class="line">    <span class="keyword">auto</span> future = p.<span class="built_in">get_future</span>();</span><br><span class="line">    <span class="keyword">auto</span> th = <span class="built_in">thread</span>(TestFrture, <span class="built_in">move</span>(p));</span><br><span class="line">    future.<span class="built_in">get</span>();</span><br><span class="line">    </span><br><span class="line">    th.<span class="built_in">join</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="线程池实现"><a href="#线程池实现" class="headerlink" title="线程池实现"></a>线程池实现</h1><h1 id="杂"><a href="#杂" class="headerlink" title="杂"></a>杂</h1><ol>
-<li><p>调用一次</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Calloncefunction</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">static</span> std::once_flag = flag;</span><br><span class="line">    std::<span class="built_in">call_once</span>(flag, Calloncefunction);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1214,7 +1263,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1227,7 +1276,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
