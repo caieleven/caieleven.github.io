@@ -423,7 +423,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-27 14:08:01" itemprop="dateModified" datetime="2021-08-27T14:08:01+08:00">2021-08-27</time>
+                <time title="Modified: 2021-10-10 21:41:08" itemprop="dateModified" datetime="2021-10-10T21:41:08+08:00">2021-10-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -509,7 +509,16 @@
 <li>创建team：待完善</li>
 <li>多人协作，如何解决冲突？</li>
 </ol>
-<h1 id="6-gitignore"><a href="#6-gitignore" class="headerlink" title="6. gitignore"></a>6. gitignore</h1><p>如果想把已经push过的某些目录或文件加入忽略规则，则需要先把本地缓存删除（改变为未track状态），然后提交：</p>
+<h1 id="6-gitignore"><a href="#6-gitignore" class="headerlink" title="6. gitignore"></a>6. gitignore</h1><h2 id="6-1-常用规则"><a href="#6-1-常用规则" class="headerlink" title="6.1 常用规则"></a>6.1 常用规则</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/xxx/	过滤整个文件夹</span><br><span class="line">*.zip	过滤zip文件</span><br><span class="line">/xxx/ooo.cpp	过滤某个文件</span><br><span class="line">!src/	不过滤</span><br><span class="line">!*.zip</span><br><span class="line">!/xxx/ooo.cpp</span><br></pre></td></tr></table></figure>
+
+<p>语法：</p>
+<blockquote>
+<p>以 <strong>/</strong> 开头表示目录</p>
+<p>以 ***** 匹配多个字符</p>
+<p>……同正则表达式</p>
+</blockquote>
+<p>此外，git对于.gitignore配置文件是按行从上到下进行匹配的，这就意味着如果前面的规则匹配的范围更大，则后面的规则将不会生效。</p>
+<p>如果想把已经push过的某些目录或文件加入忽略规则，则需要先把本地缓存删除（改变为未track状态），然后提交：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&#x27;updata .gitignore&#x27;</span></span><br></pre></td></tr></table></figure>
 
 

@@ -28,7 +28,7 @@
 <meta property="og:description" content="1. 概念epoll是一种I&#x2F;O事件通知机制，是linux内核实现IO多路复用的重要手段。 IO多路复用是指，在一个操作里同时监听多个输入输出源，在其中一个或多个输入输出源可用的时候返回，然后对其经进行读写操作。 可读事件，就是当文件描述符关联的内核读缓冲区可读（就是内核缓冲区非空），则触发可读事件。 可写事件，当文件描述符关联的内核写缓冲区可写（内核缓冲区不满，有空闲空间可以写入），则触发可写事">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-22T13:54:21.000Z">
-<meta property="article:modified_time" content="2021-09-22T14:28:08.224Z">
+<meta property="article:modified_time" content="2021-09-23T15:54:01.855Z">
 <meta property="article:author" content="Caieleven">
 <meta property="article:tag" content="epoll">
 <meta name="twitter:card" content="summary">
@@ -183,10 +183,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-09-22 21:54:21 / Modified: 22:28:08" itemprop="dateCreated datePublished" datetime="2021-09-22T21:54:21+08:00">2021-09-22</time>
+              <time title="Created: 2021-09-22 21:54:21" itemprop="dateCreated datePublished" datetime="2021-09-22T21:54:21+08:00">2021-09-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-23 23:54:01" itemprop="dateModified" datetime="2021-09-23T23:54:01+08:00">2021-09-23</time>
+              </span>
 
           
 
@@ -204,15 +210,30 @@
 <p>可读事件，就是当文件描述符关联的内核读缓冲区可读（就是内核缓冲区非空），则触发可读事件。</p>
 <p>可写事件，当文件描述符关联的内核写缓冲区可写（内核缓冲区不满，有空闲空间可以写入），则触发可写事件。</p>
 <p>所以，epoll就是当文件描述符的内核缓冲区非空时，发出可读信号，可写缓冲区不满时，发出可写信号。</p>
-<h1 id="2-重要API"><a href="#2-重要API" class="headerlink" title="2. 重要API"></a>2. 重要API</h1><h2 id="1-int-epoll-create-int-size"><a href="#1-int-epoll-create-int-size" class="headerlink" title="1. int epoll_create(int size)"></a>1. int epoll_create(int size)</h2><p>产生一个epoll实例数据结构并返回一个文件描述符（epoll实例的句柄）。</p>
+<h1 id="2-重要API"><a href="#2-重要API" class="headerlink" title="2. 重要API"></a>2. 重要API</h1><h2 id="1-int-epoll-create-int-size"><a href="#1-int-epoll-create-int-size" class="headerlink" title="1. int epoll_create(int size)"></a>1. int epoll_create(int size)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>产生一个epoll实例数据结构并返回一个文件描述符（epoll实例的句柄）。</p>
 <p>参数size表示所要监视文件描述符的最大值。</p>
-<h2 id="2-int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event"><a href="#2-int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event" class="headerlink" title="2. int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)"></a>2. int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)</h2><p>将被监听的描述符添加到红黑树或从红黑树中删除，又或者是对监听事件进行修改。</p>
+<p>由于epoll早期，对于监控文件描述符的组织使用的是hash表，而现在使用红黑树。所以，现在size已经没有意义了。</p>
+<h2 id="2-int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event"><a href="#2-int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event" class="headerlink" title="2. int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)"></a>2. int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event *event)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>将被监听的描述符添加到红黑树或从红黑树中删除，又或者是对监听事件进行修改。</p>
 <h3 id="1-参数op说明操作类型："><a href="#1-参数op说明操作类型：" class="headerlink" title="1. 参数op说明操作类型："></a>1. 参数op说明操作类型：</h3><p>EPOLL_CTL_ADD：<br>EPOLL_CTL_DEL<br>EPOLL_CTL_MOD</p>
 <h3 id="2-struct-epoll-event"><a href="#2-struct-epoll-event" class="headerlink" title="2. struct epoll_event"></a>2. struct epoll_event</h3><p>描述一个文件描述符的epoll行为。其中，数据结构如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> events;</span><br><span class="line">    <span class="keyword">epoll_data_t</span> data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">union</span> <span class="title">epoll_data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">void</span> *ptr;</span><br><span class="line">    <span class="keyword">int</span> fd;</span><br><span class="line">    <span class="keyword">uint32_t</span> u32;</span><br><span class="line">    <span class="keyword">uint64_t</span> u64;</span><br><span class="line">&#125;<span class="keyword">epoll_data_t</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> events;</span><br><span class="line">    <span class="keyword">epoll_data_t</span> data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">union</span> <span class="title">epoll_data</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">void</span> *ptr;	<span class="comment">//指定与fd相关的用户数据</span></span><br><span class="line">    <span class="keyword">int</span> fd;	<span class="comment">//指定事件所从属的目标文件描述符</span></span><br><span class="line">    <span class="keyword">uint32_t</span> u32;</span><br><span class="line">    <span class="keyword">uint64_t</span> u64;</span><br><span class="line">&#125;<span class="keyword">epoll_data_t</span>;</span><br></pre></td></tr></table></figure>
 
 <p>在使用epoll_wait函数返回处于ready状态的描述符列表时，data域时唯一能给出描述符信息的字段，所以，在调用epoll_ctl加入一个需要检测的描述符时，一定要在此域写入描述符相关信息。</p>
 <p>events域是bit mask，描述一组epoll事件，在epoll_ctl调用中解释为：描述符所期望的epoll事件，可多选。</p>
+<h2 id="3-epoll-wait"><a href="#3-epoll-wait" class="headerlink" title="3. epoll_wait"></a>3. epoll_wait</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event* events, <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>成功时返回就绪的文件描述符个数，失败时返回-1并设置errno</p>
+<p>timeout：指定epoll的超时事件，单位为毫秒。当值为-1时，一直阻塞。</p>
+<p>maxevents：最多监听多少个事件</p>
+<p>events：检测到事件，将所有就绪的事件从内核事件表中复制到events指向的数组中。</p>
 
     </div>
 
@@ -296,7 +317,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">1. 概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E9%87%8D%E8%A6%81API"><span class="nav-number">2.</span> <span class="nav-text">2. 重要API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-int-epoll-create-int-size"><span class="nav-number">2.1.</span> <span class="nav-text">1. int epoll_create(int size)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event"><span class="nav-number">2.2.</span> <span class="nav-text">2. int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8F%82%E6%95%B0op%E8%AF%B4%E6%98%8E%E6%93%8D%E4%BD%9C%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 参数op说明操作类型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-struct-epoll-event"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. struct epoll_event</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">1. 概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E9%87%8D%E8%A6%81API"><span class="nav-number">2.</span> <span class="nav-text">2. 重要API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-int-epoll-create-int-size"><span class="nav-number">2.1.</span> <span class="nav-text">1. int epoll_create(int size)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event"><span class="nav-number">2.2.</span> <span class="nav-text">2. int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8F%82%E6%95%B0op%E8%AF%B4%E6%98%8E%E6%93%8D%E4%BD%9C%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 参数op说明操作类型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-struct-epoll-event"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. struct epoll_event</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-epoll-wait"><span class="nav-number">2.3.</span> <span class="nav-text">3. epoll_wait</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -405,106 +405,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/" class="post-title-link" itemprop="url">c++左右值与万能引用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-08-22 15:22:03" itemprop="dateCreated datePublished" datetime="2021-08-22T15:22:03+08:00">2021-08-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-15 10:48:46" itemprop="dateModified" datetime="2021-09-15T10:48:46+08:00">2021-09-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-什么是左值右值"><a href="#1-什么是左值右值" class="headerlink" title="1. 什么是左值右值"></a>1. 什么是左值右值</h1><p>在c++中，左值与右值定义较c而言，不同。</p>
-<p>根据《c++ Primer》中的说法：</p>
-<blockquote>
-<p>一个表达式是左值还是右值，取决于我们使用的是它的值还是它在内存中的位置。</p>
-</blockquote>
-<p>在c++中，左右值有个重要特点：</p>
-<blockquote>
-<ul>
-<li>左值存放在对象中，有持久的状态。</li>
-<li>右值要么是字面常量，要么是在表达式求值过程中创建的临时对象，没有持久的状态。</li>
-</ul>
-</blockquote>
-<h1 id="2-左值引用与右值引用"><a href="#2-左值引用与右值引用" class="headerlink" title="2. 左值引用与右值引用"></a>2. 左值引用与右值引用</h1><p>左值引用时常见的引用，我们一般所说的引用就是左值引用，左值引用就是将一个对象的内存空间绑定到另一个变量上。根据定义，可以看到，我们在创建引用时，使用的是一个对象在内存中的位置，这个对象就是左值，因此，我们不能将一个右值绑定到左值引用上。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> temp = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;atemp = temp;		<span class="comment">//正确</span></span><br><span class="line"><span class="keyword">int</span> &amp;btemp = <span class="number">1</span>;			<span class="comment">//错误</span></span><br></pre></td></tr></table></figure>
-
-<p>另外，由于常量左值引用保证我们不可以通过引用改变内存空c间的值，所以，我们可以将右值绑定到常量引用上。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; ctemp = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<p>右值引用的声明方法与左值不同，它只能绑定到右值上。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; atemp = a;		<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">int</span> &amp;&amp; btemp = <span class="number">1</span>;		<span class="comment">//正确</span></span><br></pre></td></tr></table></figure>
-
-<p>由于右值引用只能绑定到右值上，根据前面所介绍的右值特性：</p>
-<blockquote>
-<p>右值引用的对象，是临时的，即将被销毁，并且，右值引用的对象，不会在其它地方使用。</p>
-</blockquote>
-<p>所以：</p>
-<p><strong>接收和使用右值引用的代码，可以自由接管所引用的对象的资源，而无需担心对其他代码逻辑造成数据破坏</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC%E4%B8%8E%E4%B8%87%E8%83%BD%E5%BC%95%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -586,6 +486,109 @@
 </blockquote>
 <p>所以：</p>
 <p><strong>接收和使用右值引用的代码，可以自由接管所引用的对象的资源，而无需担心对其他代码逻辑造成数据破坏</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/" class="post-title-link" itemprop="url">c++左右值与万能引用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-22 15:22:03" itemprop="dateCreated datePublished" datetime="2021-08-22T15:22:03+08:00">2021-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-24 17:04:24" itemprop="dateModified" datetime="2021-09-24T17:04:24+08:00">2021-09-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-什么是左值右值"><a href="#1-什么是左值右值" class="headerlink" title="1. 什么是左值右值"></a>1. 什么是左值右值</h1><p>在c++中，左值与右值定义较c而言，不同。</p>
+<p>根据《c++ Primer》中的说法：</p>
+<blockquote>
+<p>一个表达式是左值还是右值，取决于我们使用的是它的值还是它在内存中的位置。</p>
+</blockquote>
+<p>在c++中，左右值有个重要特点：</p>
+<blockquote>
+<ul>
+<li>左值存放在对象中，有持久的状态。</li>
+<li>右值要么是字面常量，要么是在表达式求值过程中创建的临时对象，没有持久的状态。</li>
+</ul>
+</blockquote>
+<h1 id="2-左值引用与右值引用"><a href="#2-左值引用与右值引用" class="headerlink" title="2. 左值引用与右值引用"></a>2. 左值引用与右值引用</h1><p>左值引用时常见的引用，我们一般所说的引用就是左值引用，左值引用就是将一个对象的内存空间绑定到另一个变量上。根据定义，可以看到，我们在创建引用时，使用的是一个对象在内存中的位置，这个对象就是左值，因此，我们不能将一个右值绑定到左值引用上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> temp = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;atemp = temp;		<span class="comment">//正确</span></span><br><span class="line"><span class="keyword">int</span> &amp;btemp = <span class="number">1</span>;			<span class="comment">//错误</span></span><br></pre></td></tr></table></figure>
+
+<p>另外，由于常量左值引用保证我们不可以通过引用改变内存空c间的值，所以，我们可以将右值绑定到常量引用上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; ctemp = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>右值引用的声明方法与左值不同，它只能绑定到右值上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; atemp = a;		<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">int</span> &amp;&amp; btemp = <span class="number">1</span>;		<span class="comment">//正确</span></span><br></pre></td></tr></table></figure>
+
+<p>由于右值引用只能绑定到右值上，根据前面所介绍的右值特性：</p>
+<blockquote>
+<p>右值引用的对象，是临时的，即将被销毁，并且，右值引用的对象，不会在其它地方使用。</p>
+</blockquote>
+<p>所以：</p>
+<p><strong>接收和使用右值引用的代码，可以自由接管所引用的对象的资源，而无需担心对其他代码逻辑造成数据破坏</strong></p>
+<p>解释问题：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">obj</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">obj</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;construct&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">obj</span>(<span class="keyword">int</span> i)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;another&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">obj</span>(<span class="keyword">const</span> obj&amp; temp)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;copy&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">obj</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;delete&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_emplace</span><span class="params">(obj&amp; T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;enter into func&quot;</span> &lt;&lt; endl;</span><br><span class="line">    queue&lt;obj&gt; tempq;</span><br><span class="line">    tempq.<span class="built_in">emplace</span>(T);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">obj <span class="title">cc</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">test_emplace</span>(cc);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;div&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
