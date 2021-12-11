@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1. 几种常见的shell sh、csh、tcsh、ash bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。  2. Shell变量在Bash shell中，每个变量的值都是字符串。 定义变量Shell支持三种定义变量的方式： 123a&#x3D;valuea&#x3D;&amp;#x27;value&amp;#x27;a&#x3D;&quot;value&quot;   注意：赋值号的周">
+  <meta name="description" content="1. 几种常见的shell sh、csh、tcsh、ash bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。sh写的脚本可以不加修改的在bash中执行。  2. Shell脚本的建立与执行1. Shell脚本建立shell脚本中，用 # 做程序注释，但是**#！**不是注释。  #！ ：声明解释脚本所用的解释器，如果不声明，就用该系统的默认解释">
 <meta property="og:type" content="article">
 <meta property="og:title" content="shell">
 <meta property="og:url" content="http://example.com/2021/08/15/shell/index.html">
 <meta property="og:site_name" content="雪堂">
-<meta property="og:description" content="1. 几种常见的shell sh、csh、tcsh、ash bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。  2. Shell变量在Bash shell中，每个变量的值都是字符串。 定义变量Shell支持三种定义变量的方式： 123a&#x3D;valuea&#x3D;&amp;#x27;value&amp;#x27;a&#x3D;&quot;value&quot;   注意：赋值号的周">
+<meta property="og:description" content="1. 几种常见的shell sh、csh、tcsh、ash bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。sh写的脚本可以不加修改的在bash中执行。  2. Shell脚本的建立与执行1. Shell脚本建立shell脚本中，用 # 做程序注释，但是**#！**不是注释。  #！ ：声明解释脚本所用的解释器，如果不声明，就用该系统的默认解释">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-15T13:06:57.000Z">
-<meta property="article:modified_time" content="2021-09-03T06:28:36.857Z">
+<meta property="article:modified_time" content="2021-11-10T15:41:29.726Z">
 <meta property="article:author" content="Caieleven">
 <meta property="article:tag" content="-shell">
 <meta name="twitter:card" content="summary">
@@ -191,7 +191,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-03 14:28:36" itemprop="dateModified" datetime="2021-09-03T14:28:36+08:00">2021-09-03</time>
+                <time title="Modified: 2021-11-10 23:41:29" itemprop="dateModified" datetime="2021-11-10T23:41:29+08:00">2021-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -216,29 +216,48 @@
       
         <h1 id="1-几种常见的shell"><a href="#1-几种常见的shell" class="headerlink" title="1. 几种常见的shell"></a>1. 几种常见的shell</h1><ul>
 <li>sh、csh、tcsh、ash</li>
-<li>bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。</li>
+<li>bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。sh写的脚本可以不加修改的在bash中执行。</li>
 </ul>
-<h1 id="2-Shell变量"><a href="#2-Shell变量" class="headerlink" title="2. Shell变量"></a>2. Shell变量</h1><p>在Bash shell中，每个变量的值都是字符串。</p>
-<h2 id="定义变量"><a href="#定义变量" class="headerlink" title="定义变量"></a>定义变量</h2><p>Shell支持三种定义变量的方式：</p>
+<h1 id="2-Shell脚本的建立与执行"><a href="#2-Shell脚本的建立与执行" class="headerlink" title="2. Shell脚本的建立与执行"></a>2. Shell脚本的建立与执行</h1><h2 id="1-Shell脚本建立"><a href="#1-Shell脚本建立" class="headerlink" title="1. Shell脚本建立"></a>1. Shell脚本建立</h2><p>shell脚本中，用 <strong>#</strong> 做程序注释，但是**#！**不是注释。</p>
+<blockquote>
+<p><strong>#！</strong> ：声明解释脚本所用的解释器，如果不声明，就用该系统的默认解释器执行，但一般建议加上，方面程序移植。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Shell脚本的默认后缀名为**.sh** 。在UNIX和Linux中，不以文件的后缀名来区分文件类型。</p>
+<h2 id="2-Shell脚本执行方式"><a href="#2-Shell脚本执行方式" class="headerlink" title="2. Shell脚本执行方式"></a>2. Shell脚本执行方式</h2><ol>
+<li><p>sh &lt; script-name</p>
+</li>
+<li><p>sh script-name [parameter]</p>
+</li>
+<li><p>chmod a+x script-name</p>
+<p>./script-name</p>
+</li>
+</ol>
+<h1 id="3-Shell变量"><a href="#3-Shell变量" class="headerlink" title="3. Shell变量"></a>3. Shell变量</h1><p>在Bash shell中，每个变量的值都是字符串。</p>
+<h2 id="1-Shell环境变量"><a href="#1-Shell环境变量" class="headerlink" title="1.Shell环境变量"></a>1.Shell环境变量</h2><h2 id="2-定义变量"><a href="#2-定义变量" class="headerlink" title="2.定义变量"></a>2.定义变量</h2><p>Shell支持三种定义变量的方式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a=value</span><br><span class="line">a=<span class="string">&#x27;value&#x27;</span></span><br><span class="line">a=<span class="string">&quot;value&quot;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>注意：<strong>赋值号的周围不能有空格</strong></p>
+<p>如果赋值给变量的值有空白字符，那么就应用双引号</p>
 </blockquote>
-<h2 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h2><p>变量名前加<code>$</code>即可，如：</p>
+<h2 id="3-使用变量"><a href="#3-使用变量" class="headerlink" title="3.使用变量"></a>3.使用变量</h2><p>变量名前加<code>$</code>即可，如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="string">&quot;hello world&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$x</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;x&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>变量名外的大括号是可选的，加括号可以帮助解释器识别变量的边界，比如这种情况：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">&quot;caieleven&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;My name is <span class="variable">$&#123;caieleven&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="修改变量"><a href="#修改变量" class="headerlink" title="修改变量"></a>修改变量</h2><p>已定义的变量可重新赋值，但赋值时变量名前不加<code>$</code>。</p>
-<h2 id="将命令的结果赋值给变量"><a href="#将命令的结果赋值给变量" class="headerlink" title="将命令的结果赋值给变量"></a>将命令的结果赋值给变量</h2><p>把命令用<code>$()</code>包围起来，如：</p>
+<h2 id="4-修改变量"><a href="#4-修改变量" class="headerlink" title="4.修改变量"></a>4.修改变量</h2><p>已定义的变量可重新赋值，但赋值时变量名前不加<code>$</code>。</p>
+<p>使用unset删除变量</p>
+<h2 id="5-将命令的结果赋值给变量"><a href="#5-将命令的结果赋值给变量" class="headerlink" title="5.将命令的结果赋值给变量"></a>5.将命令的结果赋值给变量</h2><p>把命令用<code>$()</code>包围起来，如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">log</span>=$(cat myname.txt)</span><br></pre></td></tr></table></figure>
 
-<h2 id="只读变量"><a href="#只读变量" class="headerlink" title="只读变量"></a>只读变量</h2><p>我们可以用<code>readonly</code>命令将变量定义为只读变量，如：</p>
+<h2 id="6-只读变量"><a href="#6-只读变量" class="headerlink" title="6.只读变量"></a>6.只读变量</h2><p>我们可以用<code>readonly</code>命令将变量定义为只读变量，如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="string">&quot;fje&quot;</span></span><br><span class="line"><span class="built_in">readonly</span> x</span><br></pre></td></tr></table></figure>
 
-<h2 id="shell特殊变量"><a href="#shell特殊变量" class="headerlink" title="shell特殊变量"></a>shell特殊变量</h2><p>特殊变量列表</p>
+<h2 id="7-shell特殊变量"><a href="#7-shell特殊变量" class="headerlink" title="7.shell特殊变量"></a>7.shell特殊变量</h2><ol>
+<li>特殊变量列表</li>
+</ol>
 <table>
 <thead>
 <tr>
@@ -260,22 +279,111 @@
 </tr>
 <tr>
 <td>$*</td>
-<td>传递给脚本或函数的所有参数</td>
+<td>传递给脚本或函数的所有参数，作为单个字符串</td>
 </tr>
 <tr>
 <td>$@</td>
-<td>传递给脚本或函数的所有参数，与前者有些许不同</td>
+<td>传递给脚本或函数的所有参数，每个都作为独立的字符串</td>
 </tr>
 <tr>
 <td>$?</td>
-<td>上个命令的退出状态，或函数的返回值</td>
+<td>上个命令的退出状态，或函数的返回值，如果上一个命令执行陈工，则为0，否则非0</td>
 </tr>
 <tr>
 <td>$$</td>
 <td>当前Shell进程ID</td>
 </tr>
 </tbody></table>
-<h1 id="3-循环语句"><a href="#3-循环语句" class="headerlink" title="3. 循环语句"></a>3. 循环语句</h1><p>bash shell中提供三种循环方式：for，while，until</p>
+<ol start="2">
+<li><p>位置参数</p>
+<p>Bash共有10个位置参数，其中$0表示Shell脚本名或命令名</p>
+<p>输出位置参数用echo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br></pre></td></tr></table></figure>
+
+<p>用set给参数赋值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br><span class="line"><span class="built_in">set</span> m1 m2</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br></pre></td></tr></table></figure>
+
+<p>用shift移动位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$0</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br><span class="line"><span class="built_in">shift</span> </span><br><span class="line"><span class="comment">#默认左移1</span></span><br><span class="line"><span class="built_in">shift</span> 2</span><br><span class="line"><span class="comment">#可以带一个数字</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="变量扩展功能"><a href="#变量扩展功能" class="headerlink" title="变量扩展功能"></a>变量扩展功能</h2><ol>
+<li><p>取子字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;value_name:start&#125;</span> <span class="variable">$&#123;value_name:start:length&#125;</span></span><br><span class="line">var=<span class="string">&quot;caieleven&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var:1&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var:0:3&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>计算字符串长度</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;#value_name&#125;</span></span><br><span class="line">var=<span class="string">&quot;caieleven&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#var&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>数组</p>
+<p>Bash只支持一维数组。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">array_name=(value0 value1)</span><br><span class="line">or</span><br><span class="line">array_name[0]=value0</span><br><span class="line">array_name[1]=value1</span><br></pre></td></tr></table></figure>
+
+<p>@或* 可以获取数组中所有元素，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;one: <span class="variable">$&#123;array_name[*]&#125;</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;two: <span class="variable">$&#123;array_name[@]&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="4-Shell特殊字符"><a href="#4-Shell特殊字符" class="headerlink" title="4. Shell特殊字符"></a>4. Shell特殊字符</h1><h2 id="1-Shell通配符"><a href="#1-Shell通配符" class="headerlink" title="1. Shell通配符"></a>1. Shell通配符</h2><p>跟正则表达式相同</p>
+<p>*匹配任意个字符，？匹配一个任意字符，[]匹配……，！……</p>
+<h2 id="2-引号"><a href="#2-引号" class="headerlink" title="2. 引号"></a>2. 引号</h2><ol>
+<li>由双引号括起来得字符，除$、倒引号和反斜杠仍保留其特殊功能外，其余字符作为普通字符对待</li>
+<li>单引号括起来得字符或字符串都作为普通字符出现</li>
+<li>倒引号``，被Shell解释为命令行，先执行该命令，然后以其输出结果取代命令</li>
+</ol>
+<h2 id="3-执行顺序操作符"><a href="#3-执行顺序操作符" class="headerlink" title="3. 执行顺序操作符"></a>3. 执行顺序操作符</h2><ol>
+<li><p>顺序分隔符—— <strong>;</strong></p>
+</li>
+<li><p>管道线—— <strong>|</strong></p>
+<p>前面命令的输出作为后面命令的输入，执行顺序为顺序执行</p>
+</li>
+<li><p>逻辑与—— &amp;&amp;</p>
+<p>先运行前面的命令，运行成功后，继续运行靠后的命令，如果不成功，不运行后面的命令</p>
+<p>注：在Shell中，执行成功返回0，执行失败返回非0</p>
+</li>
+<li><p>逻辑或—— ||</p>
+<p>先运行前面的命令，若成功，后面的命令不运行，反之，则运行</p>
+</li>
+</ol>
+<h2 id="4-其它字符"><a href="#4-其它字符" class="headerlink" title="4. 其它字符"></a>4. 其它字符</h2><ol>
+<li><p>注释符——#</p>
+</li>
+<li><p>转义字符—— \</p>
+</li>
+<li><p>后台操作符—— &amp;</p>
+<p>在命令后加&amp;，让程序后台执行。用jobs查看挂到后台的命令，fg将后台命令恢复到前台运行，Ctrl+Z暂时把当前程序挂到后台，挂起后的进程不再进行任何操作。</p>
+</li>
+</ol>
+<h1 id="5-输入输出控制"><a href="#5-输入输出控制" class="headerlink" title="5. 输入输出控制"></a>5. 输入输出控制</h1><h2 id="1-输入输出的标准文件"><a href="#1-输入输出的标准文件" class="headerlink" title="1. 输入输出的标准文件"></a>1. 输入输出的标准文件</h2><p>Linux/UNIX中每个命令都是以进程方式运行，每个进程运行时，自动打开三个文件，也就是命令的标准文件，分别用于命令读取输入、输入结果以及输出错误，即标准输入文件（stdin）、标准输出文件（stdout）、标准错误输出文件（stderr）。</p>
+<h2 id="2-输入输出重定向"><a href="#2-输入输出重定向" class="headerlink" title="2. 输入输出重定向"></a>2. 输入输出重定向</h2><ol>
+<li><p>输入重定向——“&lt;”</p>
+<p>解除键盘作为命令的标准输入，将文件作为命令的输入源。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> &lt; inputfile</span><br></pre></td></tr></table></figure></li>
+<li><p>输出重定向——“&gt;”</p>
+</li>
+<li><p>输出附加定向命令——“&gt;&gt;”</p>
+<p>不破坏原有文件，将输出附加到指定文件后面</p>
+</li>
+<li><p>标准错误重定向命令——“2&gt;”</p>
+</li>
+</ol>
+<h2 id="3-输出输出命令"><a href="#3-输出输出命令" class="headerlink" title="3. 输出输出命令"></a>3. 输出输出命令</h2><ol>
+<li><p>read命令</p>
+<p>利用read命令从标准输入读取数据，然后赋值给指定变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> value1 [value2]</span><br></pre></td></tr></table></figure>
+
+<p>输入数据时，数据间以空格或制表符作为分隔符，如果变量个数与给定数据个数相同，则一一对应赋值；若小于，则将剩下的数据全部赋值给最后一个变量；若大于，其余变量赋值为空串。</p>
+</li>
+<li><p>echo</p>
+<p>将后面的参数再标准输出上输出，多个参数以空格分隔，以换行终止。</p>
+</li>
+</ol>
+<h1 id="6-程序控制结构语句"><a href="#6-程序控制结构语句" class="headerlink" title="6. 程序控制结构语句"></a>6. 程序控制结构语句</h1><h2 id="ps-测试语"><a href="#ps-测试语" class="headerlink" title="ps:测试语"></a>ps:测试语</h2><p>测试语句由两种语法格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span> expression</span><br><span class="line"></span><br><span class="line">[expression]</span><br></pre></td></tr></table></figure>
+
+<p>各种运算符：</p>
+<blockquote>
+<p>-b filename : 当filename 存在并且是块文件时返回真(返回0)<br>-c filename : 当filename 存在并且是字符文件时返回真<br>-d pathname : 当pathname 存在并且是一个目录时返回真<br>-e pathname : 当由pathname 指定的文件或目录存在时返回真<br>-f filename : 当filename 存在并且是正规文件时返回真<br>-g pathname : 当由pathname 指定的文件或目录存在并且设置了SGID 位时返回真<br>-h filename : 当filename 存在并且是符号链接文件时返回真 (或 -L filename)<br>-k pathname : 当由pathname 指定的文件或目录存在并且设置了”粘滞”位时返回真<br>-p filename : 当filename 存在并且是命名管道时返回真<br>-r pathname : 当由pathname 指定的文件或目录存在并且可读时返回真<br>-s filename : 当filename 存在并且文件大小大于0 时返回真<br>-S filename : 当filename 存在并且是socket 时返回真<br>-t fd : 当fd 是与终端设备相关联的文件描述符时返回真<br>-u pathname : 当由pathname 指定的文件或目录存在并且设置了SUID 位时返回真<br>-w pathname : 当由pathname 指定的文件或目录存在并且可写时返回真<br>-x pathname : 当由pathname 指定的文件或目录存在并且可执行时返回真<br>-O pathname : 当由pathname 存在并且被当前进程的有效用户id 的用户拥有时返回真(字母O 大写)<br>-G pathname : 当由pathname 存在并且属于当前进程的有效用户id 的用户的用户组时返回真<br>file1 -nt file2 : file1 比file2 新时返回真<br>file1 -ot file2 : file1 比file2 旧时返回真</p>
+<p>-z string : 字符串string 为空串(长度为0)时返回真<br>-n string : 字符串string 为非空串时返回真<br>str1 = str2 : 字符串str1 和字符串str2 相等时返回真<br>str1 != str2 : 字符串str1 和字符串str2 不相等时返回真<br>str1 &lt; str2 : 按字典顺序排序，字符串str1 在字符串str2 之前<br>str1 &gt; str2 : 按字典顺序排序，字符串str1 在字符串str2 之后</p>
+<p>int1 -eq int2 : 如果int1 等于int2，则返回真<br>int1 -ne int2 : 如果int1 不等于int2，则返回真<br>int1 -lt int2 : 如果int1 小于int2，则返回真<br>int1 -le int2 : 如果int1 小于等于int2，则返回真<br>int1 -gt int2 : 如果int1 大于int2，则返回真<br>int1 -ge int2 : 如果int1 大于等于int2，则返回真</p>
+</blockquote>
+<h2 id="1-if"><a href="#1-if" class="headerlink" title="1. if"></a>1. if</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition</span><br><span class="line"><span class="keyword">then</span> command1</span><br><span class="line"><span class="keyword">else</span> command2</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> condition1</span><br><span class="line"><span class="keyword">then</span> command1</span><br><span class="line"><span class="keyword">elif</span> condition2</span><br><span class="line"><span class="keyword">then</span> command2</span><br><span class="line"><span class="keyword">else</span> commandn</span><br><span class="line"><span class="keyword">if</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-case"><a href="#2-case" class="headerlink" title="2. case"></a>2. case</h2><h1 id="3-循环语句"><a href="#3-循环语句" class="headerlink" title="3. 循环语句"></a>3. 循环语句</h1><p>bash shell中提供三种循环方式：for，while，until</p>
 <h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><p>语法结构：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 变量 <span class="keyword">in</span> 串行</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	执行命令</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
@@ -381,7 +489,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84shell"><span class="nav-number">1.</span> <span class="nav-text">1. 几种常见的shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Shell%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">2. Shell变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.</span> <span class="nav-text">定义变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">使用变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%8F%98%E9%87%8F"><span class="nav-number">2.3.</span> <span class="nav-text">修改变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E5%91%BD%E4%BB%A4%E7%9A%84%E7%BB%93%E6%9E%9C%E8%B5%8B%E5%80%BC%E7%BB%99%E5%8F%98%E9%87%8F"><span class="nav-number">2.4.</span> <span class="nav-text">将命令的结果赋值给变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AA%E8%AF%BB%E5%8F%98%E9%87%8F"><span class="nav-number">2.5.</span> <span class="nav-text">只读变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell%E7%89%B9%E6%AE%8A%E5%8F%98%E9%87%8F"><span class="nav-number">2.6.</span> <span class="nav-text">shell特殊变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.</span> <span class="nav-text">3. 循环语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#for%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.1.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#while%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.2.</span> <span class="nav-text">while循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#until%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.3.</span> <span class="nav-text">until循环</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84shell"><span class="nav-number">1.</span> <span class="nav-text">1. 几种常见的shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Shell%E8%84%9A%E6%9C%AC%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E6%89%A7%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">2. Shell脚本的建立与执行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Shell%E8%84%9A%E6%9C%AC%E5%BB%BA%E7%AB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">1. Shell脚本建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">2. Shell脚本执行方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Shell%E5%8F%98%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">3. Shell变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Shell%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">3.1.</span> <span class="nav-text">1.Shell环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">2.定义变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F"><span class="nav-number">3.3.</span> <span class="nav-text">3.使用变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%BF%AE%E6%94%B9%E5%8F%98%E9%87%8F"><span class="nav-number">3.4.</span> <span class="nav-text">4.修改变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%B0%86%E5%91%BD%E4%BB%A4%E7%9A%84%E7%BB%93%E6%9E%9C%E8%B5%8B%E5%80%BC%E7%BB%99%E5%8F%98%E9%87%8F"><span class="nav-number">3.5.</span> <span class="nav-text">5.将命令的结果赋值给变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%8F%AA%E8%AF%BB%E5%8F%98%E9%87%8F"><span class="nav-number">3.6.</span> <span class="nav-text">6.只读变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-shell%E7%89%B9%E6%AE%8A%E5%8F%98%E9%87%8F"><span class="nav-number">3.7.</span> <span class="nav-text">7.shell特殊变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E6%89%A9%E5%B1%95%E5%8A%9F%E8%83%BD"><span class="nav-number">3.8.</span> <span class="nav-text">变量扩展功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Shell%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="nav-number">4.</span> <span class="nav-text">4. Shell特殊字符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Shell%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">4.1.</span> <span class="nav-text">1. Shell通配符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%BC%95%E5%8F%B7"><span class="nav-number">4.2.</span> <span class="nav-text">2. 引号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">4.3.</span> <span class="nav-text">3. 执行顺序操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%85%B6%E5%AE%83%E5%AD%97%E7%AC%A6"><span class="nav-number">4.4.</span> <span class="nav-text">4. 其它字符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%8E%A7%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">5. 输入输出控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%9A%84%E6%A0%87%E5%87%86%E6%96%87%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">1. 输入输出的标准文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">5.2.</span> <span class="nav-text">2. 输入输出重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%BE%93%E5%87%BA%E8%BE%93%E5%87%BA%E5%91%BD%E4%BB%A4"><span class="nav-number">5.3.</span> <span class="nav-text">3. 输出输出命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.</span> <span class="nav-text">6. 程序控制结构语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ps-%E6%B5%8B%E8%AF%95%E8%AF%AD"><span class="nav-number">6.1.</span> <span class="nav-text">ps:测试语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-if"><span class="nav-number">6.2.</span> <span class="nav-text">1. if</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-case"><span class="nav-number">6.3.</span> <span class="nav-text">2. case</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">7.</span> <span class="nav-text">3. 循环语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#for%E5%BE%AA%E7%8E%AF"><span class="nav-number">7.1.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#while%E5%BE%AA%E7%8E%AF"><span class="nav-number">7.2.</span> <span class="nav-text">while循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#until%E5%BE%AA%E7%8E%AF"><span class="nav-number">7.3.</span> <span class="nav-text">until循环</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -395,20 +503,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

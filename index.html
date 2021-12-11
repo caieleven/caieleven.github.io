@@ -155,6 +155,272 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/08/MySql%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/08/MySql%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">MySql操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-08 11:23:05" itemprop="dateCreated datePublished" datetime="2021-12-08T11:23:05+08:00">2021-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-09 18:11:08" itemprop="dateModified" datetime="2021-12-09T18:11:08+08:00">2021-12-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-创建数据库和数据表"><a href="#1-创建数据库和数据表" class="headerlink" title="1. 创建数据库和数据表"></a>1. 创建数据库和数据表</h1><h2 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1. 创建数据库"></a>1. 创建数据库</h2><ol>
+<li><p>连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p</span><br></pre></td></tr></table></figure></li>
+<li><p>查看当前数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br></pre></td></tr></table></figure></li>
+<li><p>创建数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database dbname;</span><br></pre></td></tr></table></figure></li>
+<li><p>创建数据库时设置字符编码</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database dbname <span class="type">character</span> <span class="keyword">set</span> utf8;</span><br><span class="line">#<span class="keyword">or</span></span><br><span class="line"><span class="keyword">create</span> database dbname charset utf8;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看数据库的编码方式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> database dbname;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改数据库编码</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> database dbname <span class="type">character</span> <span class="keyword">set</span> utf8;</span><br></pre></td></tr></table></figure></li>
+<li><p>进入数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use dbname;</span><br></pre></td></tr></table></figure></li>
+<li><p>显示当前数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> database();</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="2-创建数据表"><a href="#2-创建数据表" class="headerlink" title="2. 创建数据表"></a>2. 创建数据表</h2><ol>
+<li><p>查看当前数据库中的表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> tables;</span><br></pre></td></tr></table></figure></li>
+<li><p>创建表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name(id <span class="type">INT</span>, name <span class="type">CHAR</span>(<span class="number">20</span>));</span><br></pre></td></tr></table></figure></li>
+<li><p>显示表的信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> table_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>给表添加字段</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name <span class="keyword">add</span> color <span class="type">CHAR</span>(<span class="number">10</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>删除表的字段</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name <span class="keyword">drop</span> color;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改字段的数据类型</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name modify color <span class="type">CHAR</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>修改字段的数据类型并且改名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name change name username <span class="type">CHAR</span>(<span class="number">30</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="3-常用字段类型"><a href="#3-常用字段类型" class="headerlink" title="3. 常用字段类型"></a>3. 常用字段类型</h2><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+<th>数据范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tinyint</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>smallint</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>mediumint</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>int</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bigint</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>float</td>
+<td>float(m,n)总长度、小数点后有效位数</td>
+<td></td>
+</tr>
+<tr>
+<td>double</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>time</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>year</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>datatime</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>char(n)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>vachar(n)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>text</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>blob</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="2-增删改查"><a href="#2-增删改查" class="headerlink" title="2. 增删改查"></a>2. 增删改查</h1><h2 id="1-增加"><a href="#1-增加" class="headerlink" title="1. 增加"></a>1. 增加</h2><ol>
+<li><p>插入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into table_name (字段名) values</span><br><span class="line">(值)[,()];</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="3-其它操作"><a href="#3-其它操作" class="headerlink" title="3. 其它操作"></a>3. 其它操作</h1><h2 id="1-主键"><a href="#1-主键" class="headerlink" title="1. 主键"></a>1. 主键</h2><p>主键会自动添加唯一索引，所以主键列不需要添加索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name(</span><br><span class="line">	id <span class="type">int</span> <span class="keyword">primary</span> key</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name(</span><br><span class="line">	id <span class="type">int</span>,</span><br><span class="line">    <span class="keyword">primary</span> key (id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name <span class="keyword">add</span> <span class="keyword">primary</span> key(id);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-外键"><a href="#2-外键" class="headerlink" title="2. 外键"></a>2. 外键</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name(</span><br><span class="line">	id <span class="type">int</span>,</span><br><span class="line">    <span class="keyword">foreign</span> key(id) <span class="keyword">references</span> anoter_table(id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name <span class="keyword">add</span> <span class="keyword">constraint</span> another</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/24/FireWall/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/24/FireWall/" class="post-title-link" itemprop="url">FireWall.md</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-24 09:42:59 / Modified: 10:08:48" itemprop="dateCreated datePublished" datetime="2021-10-24T09:42:59+08:00">2021-10-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/net/" itemprop="url" rel="index"><span itemprop="name">net</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一、-主要功能"><a href="#一、-主要功能" class="headerlink" title="一、 主要功能"></a>一、 主要功能</h1><p>分析出入防火墙的数据包，决定放行还是丢弃。所有的防火墙都具有IP过滤功能，就是检查IP包头，根据其IP源地址和目标地址作出放行/丢弃决定。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/23/c++%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1090,153 +1356,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/04/Python%E5%B0%8F%E7%9F%A5%E8%AF%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/04/Python%E5%B0%8F%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Python小知识</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-09-04 15:12:33 / Modified: 15:15:58" itemprop="dateCreated datePublished" datetime="2021-09-04T15:12:33+08:00">2021-09-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-深浅拷贝"><a href="#1-深浅拷贝" class="headerlink" title="1. 深浅拷贝"></a>1. 深浅拷贝</h1><ol>
-<li><p>列表的append知识浅拷贝，相当于引用，所以，下面这段代码错误：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data = []</span><br><span class="line">linedata = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">200</span>):</span><br><span class="line">    linedata.clear()</span><br><span class="line">    linedata.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">        linedata.append(random.choice(<span class="built_in">range</span>(j, <span class="number">5</span> * j + <span class="number">5</span> + i)))</span><br><span class="line">    data.append(linedata)</span><br></pre></td></tr></table></figure>
-
-<p>这将会导致data中，每一行的数据都相同。</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/31/inline%E5%85%B3%E9%94%AE%E5%AD%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/31/inline%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-title-link" itemprop="url">inline关键字</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-31 23:35:46 / Modified: 23:49:17" itemprop="dateCreated datePublished" datetime="2021-08-31T23:35:46+08:00">2021-08-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-引入inline的原因"><a href="#1-引入inline的原因" class="headerlink" title="1. 引入inline的原因"></a>1. 引入inline的原因</h1><p>在c/c++中，为了解决一些频繁调用的小函数大量消耗栈空间的问题，引入inline修饰符，表示内联函数，栈空间指放置程序局部数据（也就是函数内数据）的空间。</p>
-<h1 id="2-什么是内联函数"><a href="#2-什么是内联函数" class="headerlink" title="2. 什么是内联函数"></a>2. 什么是内联函数</h1><p>如果一个函数是内联的，那么在编译时，编译器会把该函数的代码副本放置在每一个调用该函数的地方。也就是说，编译器将程序中出现的内联函数调用表达式替换成了函数体。对于其他的函数，都是运行时才替换。所以，内联函数一般比较“精巧”。</p>
-<h1 id="3-使用限制"><a href="#3-使用限制" class="headerlink" title="3. 使用限制"></a>3. 使用限制</h1><p>函数体中，不能包含复杂的结构控制语句，例如while，for，switch，并且，内联函数不能是递归函数。</p>
-<h1 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4. 注意事项"></a>4. 注意事项</h1><ol>
-<li>定义在类中的成员函数都是内联的。如果在类外定义，则需加上inline关键字。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1306,20 +1425,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

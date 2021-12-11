@@ -155,6 +155,153 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/04/Python%E5%B0%8F%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/04/Python%E5%B0%8F%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Python小知识</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-04 15:12:33 / Modified: 15:15:58" itemprop="dateCreated datePublished" datetime="2021-09-04T15:12:33+08:00">2021-09-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-深浅拷贝"><a href="#1-深浅拷贝" class="headerlink" title="1. 深浅拷贝"></a>1. 深浅拷贝</h1><ol>
+<li><p>列表的append知识浅拷贝，相当于引用，所以，下面这段代码错误：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data = []</span><br><span class="line">linedata = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">200</span>):</span><br><span class="line">    linedata.clear()</span><br><span class="line">    linedata.append(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">        linedata.append(random.choice(<span class="built_in">range</span>(j, <span class="number">5</span> * j + <span class="number">5</span> + i)))</span><br><span class="line">    data.append(linedata)</span><br></pre></td></tr></table></figure>
+
+<p>这将会导致data中，每一行的数据都相同。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/31/inline%E5%85%B3%E9%94%AE%E5%AD%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/31/inline%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-title-link" itemprop="url">inline关键字</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-31 23:35:46 / Modified: 23:49:17" itemprop="dateCreated datePublished" datetime="2021-08-31T23:35:46+08:00">2021-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-引入inline的原因"><a href="#1-引入inline的原因" class="headerlink" title="1. 引入inline的原因"></a>1. 引入inline的原因</h1><p>在c/c++中，为了解决一些频繁调用的小函数大量消耗栈空间的问题，引入inline修饰符，表示内联函数，栈空间指放置程序局部数据（也就是函数内数据）的空间。</p>
+<h1 id="2-什么是内联函数"><a href="#2-什么是内联函数" class="headerlink" title="2. 什么是内联函数"></a>2. 什么是内联函数</h1><p>如果一个函数是内联的，那么在编译时，编译器会把该函数的代码副本放置在每一个调用该函数的地方。也就是说，编译器将程序中出现的内联函数调用表达式替换成了函数体。对于其他的函数，都是运行时才替换。所以，内联函数一般比较“精巧”。</p>
+<h1 id="3-使用限制"><a href="#3-使用限制" class="headerlink" title="3. 使用限制"></a>3. 使用限制</h1><p>函数体中，不能包含复杂的结构控制语句，例如while，for，switch，并且，内联函数不能是递归函数。</p>
+<h1 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4. 注意事项"></a>4. 注意事项</h1><ol>
+<li>定义在类中的成员函数都是内联的。如果在类外定义，则需加上inline关键字。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/28/c++%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -405,106 +552,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC%E4%B8%8E%E4%B8%87%E8%83%BD%E5%BC%95%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC%E4%B8%8E%E4%B8%87%E8%83%BD%E5%BC%95%E7%94%A8/" class="post-title-link" itemprop="url">c++左右值与万能引用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-08-22 15:22:03" itemprop="dateCreated datePublished" datetime="2021-08-22T15:22:03+08:00">2021-08-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-15 09:00:34" itemprop="dateModified" datetime="2021-09-15T09:00:34+08:00">2021-09-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-什么是左值右值"><a href="#1-什么是左值右值" class="headerlink" title="1. 什么是左值右值"></a>1. 什么是左值右值</h1><p>在c++中，左值与右值定义较c而言，不同。</p>
-<p>根据《c++ Primer》中的说法：</p>
-<blockquote>
-<p>一个表达式是左值还是右值，取决于我们使用的是它的值还是它在内存中的位置。</p>
-</blockquote>
-<p>在c++中，左右值有个重要特点：</p>
-<blockquote>
-<ul>
-<li>左值存放在对象中，有持久的状态。</li>
-<li>右值要么是字面常量，要么是在表达式求值过程中创建的临时对象，没有持久的状态。</li>
-</ul>
-</blockquote>
-<h1 id="2-左值引用与右值引用"><a href="#2-左值引用与右值引用" class="headerlink" title="2. 左值引用与右值引用"></a>2. 左值引用与右值引用</h1><p>左值引用时常见的引用，我们一般所说的引用就是左值引用，左值引用就是将一个对象的内存空间绑定到另一个变量上。根据定义，可以看到，我们在创建引用时，使用的是一个对象在内存中的位置，这个对象就是左值，因此，我们不能将一个右值绑定到左值引用上。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> temp = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;atemp = temp;		<span class="comment">//正确</span></span><br><span class="line"><span class="keyword">int</span> &amp;btemp = <span class="number">1</span>;			<span class="comment">//错误</span></span><br></pre></td></tr></table></figure>
-
-<p>另外，由于常量左值引用保证我们不可以通过引用改变内存空c间的值，所以，我们可以将右值绑定到常量引用上。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; ctemp = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<p>右值引用的声明方法与左值不同，它只能绑定到右值上。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; atemp = a;		<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">int</span> &amp;&amp; btemp = <span class="number">1</span>;		<span class="comment">//正确</span></span><br></pre></td></tr></table></figure>
-
-<p>由于右值引用只能绑定到右值上，根据前面所介绍的右值特性：</p>
-<blockquote>
-<p>右值引用的对象，是临时的，即将被销毁，并且，右值引用的对象，不会在其它地方使用。</p>
-</blockquote>
-<p>所以：</p>
-<p><strong>接收和使用右值引用的代码，可以自由接管所引用的对象的资源，而无需担心对其他代码逻辑造成数据破坏</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -589,6 +636,106 @@
 <p>解释问题：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">obj</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">obj</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;construct&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">obj</span>(<span class="keyword">int</span> i)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;another&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">obj</span>(<span class="keyword">const</span> obj&amp; temp)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;copy&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">obj</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;delete&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_emplace</span><span class="params">(obj&amp; T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;enter into func&quot;</span> &lt;&lt; endl;</span><br><span class="line">    queue&lt;obj&gt; tempq;</span><br><span class="line">    tempq.<span class="built_in">emplace</span>(T);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">obj <span class="title">cc</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">test_emplace</span>(cc);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;div&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC%E4%B8%8E%E4%B8%87%E8%83%BD%E5%BC%95%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Caieleven">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪堂">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/22/c++%E5%B7%A6%E5%8F%B3%E5%80%BC%E4%B8%8E%E4%B8%87%E8%83%BD%E5%BC%95%E7%94%A8/" class="post-title-link" itemprop="url">c++左右值与万能引用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-22 15:22:03" itemprop="dateCreated datePublished" datetime="2021-08-22T15:22:03+08:00">2021-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-15 09:00:34" itemprop="dateModified" datetime="2021-09-15T09:00:34+08:00">2021-09-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-什么是左值右值"><a href="#1-什么是左值右值" class="headerlink" title="1. 什么是左值右值"></a>1. 什么是左值右值</h1><p>在c++中，左值与右值定义较c而言，不同。</p>
+<p>根据《c++ Primer》中的说法：</p>
+<blockquote>
+<p>一个表达式是左值还是右值，取决于我们使用的是它的值还是它在内存中的位置。</p>
+</blockquote>
+<p>在c++中，左右值有个重要特点：</p>
+<blockquote>
+<ul>
+<li>左值存放在对象中，有持久的状态。</li>
+<li>右值要么是字面常量，要么是在表达式求值过程中创建的临时对象，没有持久的状态。</li>
+</ul>
+</blockquote>
+<h1 id="2-左值引用与右值引用"><a href="#2-左值引用与右值引用" class="headerlink" title="2. 左值引用与右值引用"></a>2. 左值引用与右值引用</h1><p>左值引用时常见的引用，我们一般所说的引用就是左值引用，左值引用就是将一个对象的内存空间绑定到另一个变量上。根据定义，可以看到，我们在创建引用时，使用的是一个对象在内存中的位置，这个对象就是左值，因此，我们不能将一个右值绑定到左值引用上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> temp = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;atemp = temp;		<span class="comment">//正确</span></span><br><span class="line"><span class="keyword">int</span> &amp;btemp = <span class="number">1</span>;			<span class="comment">//错误</span></span><br></pre></td></tr></table></figure>
+
+<p>另外，由于常量左值引用保证我们不可以通过引用改变内存空c间的值，所以，我们可以将右值绑定到常量引用上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; ctemp = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>右值引用的声明方法与左值不同，它只能绑定到右值上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;&amp; atemp = a;		<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">int</span> &amp;&amp; btemp = <span class="number">1</span>;		<span class="comment">//正确</span></span><br></pre></td></tr></table></figure>
+
+<p>由于右值引用只能绑定到右值上，根据前面所介绍的右值特性：</p>
+<blockquote>
+<p>右值引用的对象，是临时的，即将被销毁，并且，右值引用的对象，不会在其它地方使用。</p>
+</blockquote>
+<p>所以：</p>
+<p><strong>接收和使用右值引用的代码，可以自由接管所引用的对象的资源，而无需担心对其他代码逻辑造成数据破坏</strong></p>
 
       
     </div>
@@ -860,7 +1007,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-03 14:28:36" itemprop="dateModified" datetime="2021-09-03T14:28:36+08:00">2021-09-03</time>
+                <time title="Modified: 2021-11-10 23:41:29" itemprop="dateModified" datetime="2021-11-10T23:41:29+08:00">2021-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -885,29 +1032,48 @@
       
           <h1 id="1-几种常见的shell"><a href="#1-几种常见的shell" class="headerlink" title="1. 几种常见的shell"></a>1. 几种常见的shell</h1><ul>
 <li>sh、csh、tcsh、ash</li>
-<li>bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。</li>
+<li>bash，是Linux的默认shell，与ash完全兼容。并且，现代Linux，sh已被bash替代。sh写的脚本可以不加修改的在bash中执行。</li>
 </ul>
-<h1 id="2-Shell变量"><a href="#2-Shell变量" class="headerlink" title="2. Shell变量"></a>2. Shell变量</h1><p>在Bash shell中，每个变量的值都是字符串。</p>
-<h2 id="定义变量"><a href="#定义变量" class="headerlink" title="定义变量"></a>定义变量</h2><p>Shell支持三种定义变量的方式：</p>
+<h1 id="2-Shell脚本的建立与执行"><a href="#2-Shell脚本的建立与执行" class="headerlink" title="2. Shell脚本的建立与执行"></a>2. Shell脚本的建立与执行</h1><h2 id="1-Shell脚本建立"><a href="#1-Shell脚本建立" class="headerlink" title="1. Shell脚本建立"></a>1. Shell脚本建立</h2><p>shell脚本中，用 <strong>#</strong> 做程序注释，但是**#！**不是注释。</p>
+<blockquote>
+<p><strong>#！</strong> ：声明解释脚本所用的解释器，如果不声明，就用该系统的默认解释器执行，但一般建议加上，方面程序移植。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Shell脚本的默认后缀名为**.sh** 。在UNIX和Linux中，不以文件的后缀名来区分文件类型。</p>
+<h2 id="2-Shell脚本执行方式"><a href="#2-Shell脚本执行方式" class="headerlink" title="2. Shell脚本执行方式"></a>2. Shell脚本执行方式</h2><ol>
+<li><p>sh &lt; script-name</p>
+</li>
+<li><p>sh script-name [parameter]</p>
+</li>
+<li><p>chmod a+x script-name</p>
+<p>./script-name</p>
+</li>
+</ol>
+<h1 id="3-Shell变量"><a href="#3-Shell变量" class="headerlink" title="3. Shell变量"></a>3. Shell变量</h1><p>在Bash shell中，每个变量的值都是字符串。</p>
+<h2 id="1-Shell环境变量"><a href="#1-Shell环境变量" class="headerlink" title="1.Shell环境变量"></a>1.Shell环境变量</h2><h2 id="2-定义变量"><a href="#2-定义变量" class="headerlink" title="2.定义变量"></a>2.定义变量</h2><p>Shell支持三种定义变量的方式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a=value</span><br><span class="line">a=<span class="string">&#x27;value&#x27;</span></span><br><span class="line">a=<span class="string">&quot;value&quot;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>注意：<strong>赋值号的周围不能有空格</strong></p>
+<p>如果赋值给变量的值有空白字符，那么就应用双引号</p>
 </blockquote>
-<h2 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h2><p>变量名前加<code>$</code>即可，如：</p>
+<h2 id="3-使用变量"><a href="#3-使用变量" class="headerlink" title="3.使用变量"></a>3.使用变量</h2><p>变量名前加<code>$</code>即可，如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="string">&quot;hello world&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$x</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;x&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>变量名外的大括号是可选的，加括号可以帮助解释器识别变量的边界，比如这种情况：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">&quot;caieleven&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;My name is <span class="variable">$&#123;caieleven&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="修改变量"><a href="#修改变量" class="headerlink" title="修改变量"></a>修改变量</h2><p>已定义的变量可重新赋值，但赋值时变量名前不加<code>$</code>。</p>
-<h2 id="将命令的结果赋值给变量"><a href="#将命令的结果赋值给变量" class="headerlink" title="将命令的结果赋值给变量"></a>将命令的结果赋值给变量</h2><p>把命令用<code>$()</code>包围起来，如：</p>
+<h2 id="4-修改变量"><a href="#4-修改变量" class="headerlink" title="4.修改变量"></a>4.修改变量</h2><p>已定义的变量可重新赋值，但赋值时变量名前不加<code>$</code>。</p>
+<p>使用unset删除变量</p>
+<h2 id="5-将命令的结果赋值给变量"><a href="#5-将命令的结果赋值给变量" class="headerlink" title="5.将命令的结果赋值给变量"></a>5.将命令的结果赋值给变量</h2><p>把命令用<code>$()</code>包围起来，如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">log</span>=$(cat myname.txt)</span><br></pre></td></tr></table></figure>
 
-<h2 id="只读变量"><a href="#只读变量" class="headerlink" title="只读变量"></a>只读变量</h2><p>我们可以用<code>readonly</code>命令将变量定义为只读变量，如：</p>
+<h2 id="6-只读变量"><a href="#6-只读变量" class="headerlink" title="6.只读变量"></a>6.只读变量</h2><p>我们可以用<code>readonly</code>命令将变量定义为只读变量，如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="string">&quot;fje&quot;</span></span><br><span class="line"><span class="built_in">readonly</span> x</span><br></pre></td></tr></table></figure>
 
-<h2 id="shell特殊变量"><a href="#shell特殊变量" class="headerlink" title="shell特殊变量"></a>shell特殊变量</h2><p>特殊变量列表</p>
+<h2 id="7-shell特殊变量"><a href="#7-shell特殊变量" class="headerlink" title="7.shell特殊变量"></a>7.shell特殊变量</h2><ol>
+<li>特殊变量列表</li>
+</ol>
 <table>
 <thead>
 <tr>
@@ -929,22 +1095,111 @@
 </tr>
 <tr>
 <td>$*</td>
-<td>传递给脚本或函数的所有参数</td>
+<td>传递给脚本或函数的所有参数，作为单个字符串</td>
 </tr>
 <tr>
 <td>$@</td>
-<td>传递给脚本或函数的所有参数，与前者有些许不同</td>
+<td>传递给脚本或函数的所有参数，每个都作为独立的字符串</td>
 </tr>
 <tr>
 <td>$?</td>
-<td>上个命令的退出状态，或函数的返回值</td>
+<td>上个命令的退出状态，或函数的返回值，如果上一个命令执行陈工，则为0，否则非0</td>
 </tr>
 <tr>
 <td>$$</td>
 <td>当前Shell进程ID</td>
 </tr>
 </tbody></table>
-<h1 id="3-循环语句"><a href="#3-循环语句" class="headerlink" title="3. 循环语句"></a>3. 循环语句</h1><p>bash shell中提供三种循环方式：for，while，until</p>
+<ol start="2">
+<li><p>位置参数</p>
+<p>Bash共有10个位置参数，其中$0表示Shell脚本名或命令名</p>
+<p>输出位置参数用echo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br></pre></td></tr></table></figure>
+
+<p>用set给参数赋值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br><span class="line"><span class="built_in">set</span> m1 m2</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br></pre></td></tr></table></figure>
+
+<p>用shift移动位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$0</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br><span class="line"><span class="built_in">shift</span> </span><br><span class="line"><span class="comment">#默认左移1</span></span><br><span class="line"><span class="built_in">shift</span> 2</span><br><span class="line"><span class="comment">#可以带一个数字</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="变量扩展功能"><a href="#变量扩展功能" class="headerlink" title="变量扩展功能"></a>变量扩展功能</h2><ol>
+<li><p>取子字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;value_name:start&#125;</span> <span class="variable">$&#123;value_name:start:length&#125;</span></span><br><span class="line">var=<span class="string">&quot;caieleven&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var:1&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var:0:3&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>计算字符串长度</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;#value_name&#125;</span></span><br><span class="line">var=<span class="string">&quot;caieleven&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#var&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>数组</p>
+<p>Bash只支持一维数组。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">array_name=(value0 value1)</span><br><span class="line">or</span><br><span class="line">array_name[0]=value0</span><br><span class="line">array_name[1]=value1</span><br></pre></td></tr></table></figure>
+
+<p>@或* 可以获取数组中所有元素，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;one: <span class="variable">$&#123;array_name[*]&#125;</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;two: <span class="variable">$&#123;array_name[@]&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="4-Shell特殊字符"><a href="#4-Shell特殊字符" class="headerlink" title="4. Shell特殊字符"></a>4. Shell特殊字符</h1><h2 id="1-Shell通配符"><a href="#1-Shell通配符" class="headerlink" title="1. Shell通配符"></a>1. Shell通配符</h2><p>跟正则表达式相同</p>
+<p>*匹配任意个字符，？匹配一个任意字符，[]匹配……，！……</p>
+<h2 id="2-引号"><a href="#2-引号" class="headerlink" title="2. 引号"></a>2. 引号</h2><ol>
+<li>由双引号括起来得字符，除$、倒引号和反斜杠仍保留其特殊功能外，其余字符作为普通字符对待</li>
+<li>单引号括起来得字符或字符串都作为普通字符出现</li>
+<li>倒引号``，被Shell解释为命令行，先执行该命令，然后以其输出结果取代命令</li>
+</ol>
+<h2 id="3-执行顺序操作符"><a href="#3-执行顺序操作符" class="headerlink" title="3. 执行顺序操作符"></a>3. 执行顺序操作符</h2><ol>
+<li><p>顺序分隔符—— <strong>;</strong></p>
+</li>
+<li><p>管道线—— <strong>|</strong></p>
+<p>前面命令的输出作为后面命令的输入，执行顺序为顺序执行</p>
+</li>
+<li><p>逻辑与—— &amp;&amp;</p>
+<p>先运行前面的命令，运行成功后，继续运行靠后的命令，如果不成功，不运行后面的命令</p>
+<p>注：在Shell中，执行成功返回0，执行失败返回非0</p>
+</li>
+<li><p>逻辑或—— ||</p>
+<p>先运行前面的命令，若成功，后面的命令不运行，反之，则运行</p>
+</li>
+</ol>
+<h2 id="4-其它字符"><a href="#4-其它字符" class="headerlink" title="4. 其它字符"></a>4. 其它字符</h2><ol>
+<li><p>注释符——#</p>
+</li>
+<li><p>转义字符—— \</p>
+</li>
+<li><p>后台操作符—— &amp;</p>
+<p>在命令后加&amp;，让程序后台执行。用jobs查看挂到后台的命令，fg将后台命令恢复到前台运行，Ctrl+Z暂时把当前程序挂到后台，挂起后的进程不再进行任何操作。</p>
+</li>
+</ol>
+<h1 id="5-输入输出控制"><a href="#5-输入输出控制" class="headerlink" title="5. 输入输出控制"></a>5. 输入输出控制</h1><h2 id="1-输入输出的标准文件"><a href="#1-输入输出的标准文件" class="headerlink" title="1. 输入输出的标准文件"></a>1. 输入输出的标准文件</h2><p>Linux/UNIX中每个命令都是以进程方式运行，每个进程运行时，自动打开三个文件，也就是命令的标准文件，分别用于命令读取输入、输入结果以及输出错误，即标准输入文件（stdin）、标准输出文件（stdout）、标准错误输出文件（stderr）。</p>
+<h2 id="2-输入输出重定向"><a href="#2-输入输出重定向" class="headerlink" title="2. 输入输出重定向"></a>2. 输入输出重定向</h2><ol>
+<li><p>输入重定向——“&lt;”</p>
+<p>解除键盘作为命令的标准输入，将文件作为命令的输入源。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> &lt; inputfile</span><br></pre></td></tr></table></figure></li>
+<li><p>输出重定向——“&gt;”</p>
+</li>
+<li><p>输出附加定向命令——“&gt;&gt;”</p>
+<p>不破坏原有文件，将输出附加到指定文件后面</p>
+</li>
+<li><p>标准错误重定向命令——“2&gt;”</p>
+</li>
+</ol>
+<h2 id="3-输出输出命令"><a href="#3-输出输出命令" class="headerlink" title="3. 输出输出命令"></a>3. 输出输出命令</h2><ol>
+<li><p>read命令</p>
+<p>利用read命令从标准输入读取数据，然后赋值给指定变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> value1 [value2]</span><br></pre></td></tr></table></figure>
+
+<p>输入数据时，数据间以空格或制表符作为分隔符，如果变量个数与给定数据个数相同，则一一对应赋值；若小于，则将剩下的数据全部赋值给最后一个变量；若大于，其余变量赋值为空串。</p>
+</li>
+<li><p>echo</p>
+<p>将后面的参数再标准输出上输出，多个参数以空格分隔，以换行终止。</p>
+</li>
+</ol>
+<h1 id="6-程序控制结构语句"><a href="#6-程序控制结构语句" class="headerlink" title="6. 程序控制结构语句"></a>6. 程序控制结构语句</h1><h2 id="ps-测试语"><a href="#ps-测试语" class="headerlink" title="ps:测试语"></a>ps:测试语</h2><p>测试语句由两种语法格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span> expression</span><br><span class="line"></span><br><span class="line">[expression]</span><br></pre></td></tr></table></figure>
+
+<p>各种运算符：</p>
+<blockquote>
+<p>-b filename : 当filename 存在并且是块文件时返回真(返回0)<br>-c filename : 当filename 存在并且是字符文件时返回真<br>-d pathname : 当pathname 存在并且是一个目录时返回真<br>-e pathname : 当由pathname 指定的文件或目录存在时返回真<br>-f filename : 当filename 存在并且是正规文件时返回真<br>-g pathname : 当由pathname 指定的文件或目录存在并且设置了SGID 位时返回真<br>-h filename : 当filename 存在并且是符号链接文件时返回真 (或 -L filename)<br>-k pathname : 当由pathname 指定的文件或目录存在并且设置了”粘滞”位时返回真<br>-p filename : 当filename 存在并且是命名管道时返回真<br>-r pathname : 当由pathname 指定的文件或目录存在并且可读时返回真<br>-s filename : 当filename 存在并且文件大小大于0 时返回真<br>-S filename : 当filename 存在并且是socket 时返回真<br>-t fd : 当fd 是与终端设备相关联的文件描述符时返回真<br>-u pathname : 当由pathname 指定的文件或目录存在并且设置了SUID 位时返回真<br>-w pathname : 当由pathname 指定的文件或目录存在并且可写时返回真<br>-x pathname : 当由pathname 指定的文件或目录存在并且可执行时返回真<br>-O pathname : 当由pathname 存在并且被当前进程的有效用户id 的用户拥有时返回真(字母O 大写)<br>-G pathname : 当由pathname 存在并且属于当前进程的有效用户id 的用户的用户组时返回真<br>file1 -nt file2 : file1 比file2 新时返回真<br>file1 -ot file2 : file1 比file2 旧时返回真</p>
+<p>-z string : 字符串string 为空串(长度为0)时返回真<br>-n string : 字符串string 为非空串时返回真<br>str1 = str2 : 字符串str1 和字符串str2 相等时返回真<br>str1 != str2 : 字符串str1 和字符串str2 不相等时返回真<br>str1 &lt; str2 : 按字典顺序排序，字符串str1 在字符串str2 之前<br>str1 &gt; str2 : 按字典顺序排序，字符串str1 在字符串str2 之后</p>
+<p>int1 -eq int2 : 如果int1 等于int2，则返回真<br>int1 -ne int2 : 如果int1 不等于int2，则返回真<br>int1 -lt int2 : 如果int1 小于int2，则返回真<br>int1 -le int2 : 如果int1 小于等于int2，则返回真<br>int1 -gt int2 : 如果int1 大于int2，则返回真<br>int1 -ge int2 : 如果int1 大于等于int2，则返回真</p>
+</blockquote>
+<h2 id="1-if"><a href="#1-if" class="headerlink" title="1. if"></a>1. if</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition</span><br><span class="line"><span class="keyword">then</span> command1</span><br><span class="line"><span class="keyword">else</span> command2</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> condition1</span><br><span class="line"><span class="keyword">then</span> command1</span><br><span class="line"><span class="keyword">elif</span> condition2</span><br><span class="line"><span class="keyword">then</span> command2</span><br><span class="line"><span class="keyword">else</span> commandn</span><br><span class="line"><span class="keyword">if</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-case"><a href="#2-case" class="headerlink" title="2. case"></a>2. case</h2><h1 id="3-循环语句"><a href="#3-循环语句" class="headerlink" title="3. 循环语句"></a>3. 循环语句</h1><p>bash shell中提供三种循环方式：for，while，until</p>
 <h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><p>语法结构：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 变量 <span class="keyword">in</span> 串行</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">	执行命令</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
@@ -1164,260 +1419,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/11/cmake%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/11/cmake%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">cmake常用命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-11 20:55:12 / Modified: 21:00:20" itemprop="dateCreated datePublished" datetime="2021-08-11T20:55:12+08:00">2021-08-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="cmake常用指令"><a href="#cmake常用指令" class="headerlink" title="cmake常用指令"></a>cmake常用指令</h1><ol>
-<li>cmake_minimum_required  指定CMake的最小版本要求</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">2.8</span>.<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>project  定义工程名称</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">project</span>(HI)</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>set  定义变量</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(SRC sayhello.cpp hello.cpp)</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>include_directories  向工程添加多个特定的头文件搜索路径</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_directories</span>(/usr/<span class="keyword">include</span>/myincludefolder ./<span class="keyword">include</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>link_directories - 向工程添加多个特定的库文件搜索路径</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">link_directories</span>(/usr/lib/mylibfolder ./lib)</span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>add_library - 生成库文件</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(hello SHARED <span class="variable">$&#123;SRC&#125;</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="7">
-<li>add_compile_options - 添加编译参数</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_compile_options</span>(-Wall -std=c++<span class="number">11</span>)</span><br></pre></td></tr></table></figure>
-
-<ol start="8">
-<li>add_executable - 生成可执行文件</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(main main.cpp)</span><br></pre></td></tr></table></figure>
-
-<ol start="9">
-<li>target_link_libraries - 为 target 添加需要链接的共享库</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(main hello)</span><br></pre></td></tr></table></figure>
-
-<ol start="10">
-<li>add_subdirectory - 向当前工程添加存放源文件的子目录</li>
-</ol>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(src)</span><br></pre></td></tr></table></figure>
-
-<ol start="11">
-<li>aux_source_directory - 发现一个目录下所有的源代码文件并将列表存储在一个变量中</li>
-</ol>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aux_source_directory(. SRC)</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/07/Ubuntu%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Caieleven">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪堂">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/07/Ubuntu%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="post-title-link" itemprop="url">Ubuntu文件权限</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-07 15:43:06 / Modified: 16:48:59" itemprop="dateCreated datePublished" datetime="2021-08-07T15:43:06+08:00">2021-08-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="查看权限"><a href="#查看权限" class="headerlink" title="查看权限"></a>查看权限</h1><p>使用命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l</span><br></pre></td></tr></table></figure>
-
-<p>可得到如下格式内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drwxrw-rwx 0 root toot 1233 May 1 00:34 temp</span><br></pre></td></tr></table></figure>
-
-<p>内容含义是</p>
-<table>
-<thead>
-<tr>
-<th align="center">权限</th>
-<th align="center">incode</th>
-<th align="center">所属用户</th>
-<th align="center">所属用户组</th>
-<th align="center">文件大小</th>
-<th align="center">修改时间</th>
-<th align="center">文件名</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">drwxrw-rwx</td>
-<td align="center">0</td>
-<td align="center">root</td>
-<td align="center">root</td>
-<td align="center">1233</td>
-<td align="center">…</td>
-<td align="center">temp</td>
-</tr>
-</tbody></table>
-<p>其中，各符号含义的具体含义如下：</p>
-<ul>
-<li>d 是否为文件夹</li>
-<li>r 是否有读取权限</li>
-<li>w 是否有写入权限</li>
-<li>x 是否有执行权限</li>
-<li>-表示没有此项权限</li>
-</ul>
-<p>权限具体含义：</p>
-<ul>
-<li>第一位表示是否为文件夹</li>
-<li>2-4位，表示所属用户的三项权限</li>
-<li>5-7位，表示所属用户组的三项权限</li>
-<li>8-10位表示其它用户的三项权限</li>
-</ul>
-<h1 id="更改文件权限"><a href="#更改文件权限" class="headerlink" title="更改文件权限"></a>更改文件权限</h1><p><strong>使用chmod更改权限</strong></p>
-<p>此处记录一种简单的方法：</p>
-<p>Linux系统内部设定：</p>
-<blockquote>
-<p>r = 4    w = 2    x = 1    - = 0</p>
-</blockquote>
-<p>r w x任意一种组合的三个值相加得到的结果都不相同，所以，可以如下例般修改文件权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 temp.cpp</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1487,20 +1488,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
